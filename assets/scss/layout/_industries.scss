@@ -1,0 +1,176 @@
+/* 
+    industries-1-start
+*/
+.lt-industries-1 {
+    &-bg-img {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+
+        &::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 455px;
+            background: linear-gradient(180deg, #0A1F43 0%, rgba(10, 31, 67, 0) 100%);
+            top: 0;
+            left: 0;
+        }
+    }
+
+    &-sec-title {
+        .lt-subtitle-1 {
+            border: 1px solid rgb(255 255 255 / 20%);
+        }
+        .lt-sec-title-1 {
+            color: #fff;
+            margin-bottom: 32px;
+        }
+    }
+
+
+    &-wrap {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+
+        @media #{$lg} {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        @media #{$md} {
+            grid-template-columns: 1fr 1fr ;
+        }
+
+        @media #{$xs} {
+            grid-template-columns: 1fr ;
+        }
+    }
+    
+    &-card {
+        background-color: #fff;
+        position: relative;
+        z-index: 1;
+        transition: .5s var(--lt-cube-1);
+
+        @media #{$over,$xxxl,$xxl,$xl} {
+            transform: translateY(calc(100% - 96px));
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            width: 91px;
+            height: 100%;
+            right: 0px;
+            bottom: 0px;
+            background: linear-gradient(270deg, #0A1F43 0%, rgba(10, 31, 67, 0) 100%);
+            opacity: 0.06;
+            z-index: -1;
+        }
+
+        .back-content {
+            padding: 40px 40px;
+            transition: .5s var(--lt-cube-1);
+            opacity: 0;
+
+            @media #{$xxl,$xl} {
+                padding: 40px 20px;
+            }
+
+            @media #{$lg,$md,$xs} {
+                opacity: 1;
+                padding: 40px 20px;
+            }
+
+        }
+
+        .icon-elm {
+            width: 68px;
+            height: 68px;
+            background-color: var(--lt-clr-pr-1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 38px;
+            color: #fff;
+            border-radius: 6px;
+            margin-bottom: 40px;
+            flex: 0 0 auto;
+        }
+        
+        .title {
+            font-size: 26px;
+            font-weight: 500;
+            margin-bottom: 16px;
+
+            @media #{$xxl,$xl,$lg,$md,$xs} {
+                font-size: 20px;
+            }
+        }
+        
+        .disc {
+            border-bottom: 1px solid rgb(10 31 67 / 12%);
+            padding-bottom: 24px;
+            margin-bottom: 24px;
+        }
+        
+        .btn-elm {
+            font-size: 16px;
+            color: var(--lt-clr-h-1);
+            background-color: rgb(0 56 101 / 12%);
+            border-radius: 5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 18px;
+        }
+
+        .front-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            padding: 14px;
+            padding-left: 40px;
+            justify-content: space-between;
+            z-index: 1;
+            align-items: center;
+            transition: .5s var(--lt-cube-1);
+
+            @media #{$xxl,$xl} {
+                padding: 14px;
+                padding-left: 20px;
+            }
+
+            @media #{$lg,$md,$xs} {
+                display: none;
+            }
+
+            .title {
+                font-weight: 400;
+                margin-bottom: 0;
+            }
+
+            .icon-elm {
+                margin-bottom: 0;
+            }
+        }
+
+        &:hover {
+            transform: translateY(calc(0% - 0px));
+            .front-content {
+                opacity: 0;
+                visibility: hidden;
+            }
+            .back-content {
+                opacity: 1;
+            }
+        }
+    }
+    
+
+}
+/* 
+    industries-1-end
+*/

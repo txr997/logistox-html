@@ -1,0 +1,181 @@
+$flaticon_logistox-font: "flaticon_logistox";
+
+@font-face {
+    font-family: $flaticon_logistox-font;
+    src: url("./flaticon_logistox.woff2?11dc868a6ba191cdca7130f51ff42a61") format("woff2"),
+url("./flaticon_logistox.woff?11dc868a6ba191cdca7130f51ff42a61") format("woff"),
+url("./flaticon_logistox.eot?11dc868a6ba191cdca7130f51ff42a61#iefix") format("embedded-opentype"),
+url("./flaticon_logistox.ttf?11dc868a6ba191cdca7130f51ff42a61") format("truetype"),
+url("./flaticon_logistox.svg?11dc868a6ba191cdca7130f51ff42a61#flaticon_logistox") format("svg");
+}
+
+i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
+    font-family: flaticon_logistox !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+$flaticon_logistox-map: (
+    "road": "\f101",
+    "speed": "\f102",
+    "plus": "\f103",
+    "world-wide-web": "\f104",
+    "dots": "\f105",
+    "right-up": "\f106",
+    "up-right-arrow": "\f107",
+    "fast": "\f108",
+    "truck": "\f109",
+    "air-mail": "\f10a",
+    "ship": "\f10b",
+    "lift": "\f10c",
+    "train": "\f10d",
+    "back": "\f10e",
+    "next": "\f10f",
+    "factory": "\f110",
+    "technology": "\f111",
+    "stethoscope": "\f112",
+    "delivery-box": "\f113",
+    "fast-delivery": "\f114",
+    "pin": "\f115",
+    "mozy": "\f116",
+    "letter-d": "\f117",
+    "star": "\f118",
+    "paper-plane": "\f119",
+    "search": "\f11a",
+    "dots-1": "\f11b",
+    "layer-down": "\f11c",
+    "angle-double-small-down": "\f11d",
+    "check-mark": "\f11e",
+    "cargo-ship": "\f11f",
+    "gps": "\f120",
+    "delivery-truck": "\f121",
+    "star-1": "\f122",
+    "mission": "\f123",
+    "visual": "\f124",
+    "global-distribution": "\f125",
+    "delivery": "\f126",
+    "star-2": "\f127",
+);
+
+.flaticon-road:before {
+    content: map-get($flaticon_logistox-map, "road");
+}
+.flaticon-speed:before {
+    content: map-get($flaticon_logistox-map, "speed");
+}
+.flaticon-plus:before {
+    content: map-get($flaticon_logistox-map, "plus");
+}
+.flaticon-world-wide-web:before {
+    content: map-get($flaticon_logistox-map, "world-wide-web");
+}
+.flaticon-dots:before {
+    content: map-get($flaticon_logistox-map, "dots");
+}
+.flaticon-right-up:before {
+    content: map-get($flaticon_logistox-map, "right-up");
+}
+.flaticon-up-right-arrow:before {
+    content: map-get($flaticon_logistox-map, "up-right-arrow");
+}
+.flaticon-fast:before {
+    content: map-get($flaticon_logistox-map, "fast");
+}
+.flaticon-truck:before {
+    content: map-get($flaticon_logistox-map, "truck");
+}
+.flaticon-air-mail:before {
+    content: map-get($flaticon_logistox-map, "air-mail");
+}
+.flaticon-ship:before {
+    content: map-get($flaticon_logistox-map, "ship");
+}
+.flaticon-lift:before {
+    content: map-get($flaticon_logistox-map, "lift");
+}
+.flaticon-train:before {
+    content: map-get($flaticon_logistox-map, "train");
+}
+.flaticon-back:before {
+    content: map-get($flaticon_logistox-map, "back");
+}
+.flaticon-next:before {
+    content: map-get($flaticon_logistox-map, "next");
+}
+.flaticon-factory:before {
+    content: map-get($flaticon_logistox-map, "factory");
+}
+.flaticon-technology:before {
+    content: map-get($flaticon_logistox-map, "technology");
+}
+.flaticon-stethoscope:before {
+    content: map-get($flaticon_logistox-map, "stethoscope");
+}
+.flaticon-delivery-box:before {
+    content: map-get($flaticon_logistox-map, "delivery-box");
+}
+.flaticon-fast-delivery:before {
+    content: map-get($flaticon_logistox-map, "fast-delivery");
+}
+.flaticon-pin:before {
+    content: map-get($flaticon_logistox-map, "pin");
+}
+.flaticon-mozy:before {
+    content: map-get($flaticon_logistox-map, "mozy");
+}
+.flaticon-letter-d:before {
+    content: map-get($flaticon_logistox-map, "letter-d");
+}
+.flaticon-star:before {
+    content: map-get($flaticon_logistox-map, "star");
+}
+.flaticon-paper-plane:before {
+    content: map-get($flaticon_logistox-map, "paper-plane");
+}
+.flaticon-search:before {
+    content: map-get($flaticon_logistox-map, "search");
+}
+.flaticon-dots-1:before {
+    content: map-get($flaticon_logistox-map, "dots-1");
+}
+.flaticon-layer-down:before {
+    content: map-get($flaticon_logistox-map, "layer-down");
+}
+.flaticon-angle-double-small-down:before {
+    content: map-get($flaticon_logistox-map, "angle-double-small-down");
+}
+.flaticon-check-mark:before {
+    content: map-get($flaticon_logistox-map, "check-mark");
+}
+.flaticon-cargo-ship:before {
+    content: map-get($flaticon_logistox-map, "cargo-ship");
+}
+.flaticon-gps:before {
+    content: map-get($flaticon_logistox-map, "gps");
+}
+.flaticon-delivery-truck:before {
+    content: map-get($flaticon_logistox-map, "delivery-truck");
+}
+.flaticon-star-1:before {
+    content: map-get($flaticon_logistox-map, "star-1");
+}
+.flaticon-mission:before {
+    content: map-get($flaticon_logistox-map, "mission");
+}
+.flaticon-visual:before {
+    content: map-get($flaticon_logistox-map, "visual");
+}
+.flaticon-global-distribution:before {
+    content: map-get($flaticon_logistox-map, "global-distribution");
+}
+.flaticon-delivery:before {
+    content: map-get($flaticon_logistox-map, "delivery");
+}
+.flaticon-star-2:before {
+    content: map-get($flaticon_logistox-map, "star-2");
+}

@@ -1,0 +1,73 @@
+/* 
+    partner-1-start
+*/
+.lt-partner-1 {
+    &-title {
+        font-size: 28px;
+        color: rgb(10 31 67 / 60%);
+        text-align: center;
+        font-weight: 500;
+        margin-bottom: 50px;
+
+        span {
+            color: var(--lt-clr-h-1);
+        }
+    }
+
+
+    &-logo {
+        display: flex;
+        align-items: center;
+        gap: 140px;
+        margin-right: 140px;
+
+        @media #{$xl,$lg,$md,$xs} {
+            gap: 40px;
+            margin-right: 40px;
+        }
+
+        .single-logo {
+            flex: 0 0 auto;
+            img {
+                transition: filter 0.5s ease;
+        
+                &:hover {
+                    filter: brightness(0) saturate(100%)
+                    invert(35%) sepia(98%)
+                    saturate(2500%) hue-rotate(345deg)
+                    brightness(101%) contrast(95%);
+                }
+            }
+        }
+    }
+
+    &-wrap {
+        &::after {
+            content: "";
+            width: 30%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            background: linear-gradient(90deg, #F3F3F6, transparent);
+            pointer-events: none;
+        }
+        &::before {
+            content: "";
+            width: 30%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 2;
+            background: linear-gradient(-90deg, #F3F3F6, transparent);
+            pointer-events: none;
+        }
+    }
+}
+
+
+/* 
+    partner-1-end
+*/

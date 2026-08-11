@@ -1,0 +1,310 @@
+/* 
+    price-1-start
+*/
+.lt-price-1 {
+    &-area {
+        background-color: #003865;
+    }
+
+    &-bg-img {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        mix-blend-mode: luminosity;
+    }
+
+
+    &-sec-title {
+        .lt-subtitle-1 {
+            border: 1px solid rgb(255 255 255 / 20%);
+        }
+        .lt-sec-title-1 {
+            color: #fff;
+        }
+    }
+
+    &-wrap {
+        display: grid;
+        gap: 28px;
+        grid-template-columns: 2.09fr 1fr;
+
+        @media #{$xl,$lg,$md,$xs} {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &-left {
+        background: rgba(10, 31, 67, 0.28);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(49px);
+        padding: 36px;
+        border-radius: 16px;
+
+        @media #{$xs} {
+            padding: 36px 20px;
+        }
+
+        .tab-btn-x-price {
+            display: grid;
+            gap: 40px;
+            grid-template-columns: 1.067fr 1fr;
+            align-items: center;
+            margin-bottom: 25px;
+
+            @media #{$xs} {
+                grid-template-columns: 1fr;
+            }
+        }
+    }
+
+    &-card {
+        display: grid;
+        gap: 40px;
+        grid-template-columns: 1.067fr 1fr;
+
+        
+        @media #{$xs} {
+            grid-template-columns: 1fr;
+        }
+
+        .img-elm {
+            height: 470px;
+            border-radius: 16px;
+
+            .img-elm-btn {
+                position: absolute;
+                left: 0;
+                width: 100%;
+                padding: 12px;
+                z-index: 1;
+                bottom: 0;
+            }
+
+            .btn-elm {
+                width: 100%;
+                background: var(--lt-clr-pr-1);
+                text-align: center;
+                font-size: 16px;
+                font-weight: 500;
+                color: #fff;
+                padding: 19px 10px;
+                border-radius: 8px;
+            }
+        }
+
+
+        .title {
+            font-size: 22px;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+        
+        .disc {
+            color: #fff;
+            opacity: 80%;
+            margin-bottom: 20px;
+        }
+        
+        .price {
+            font-size: 52px;
+            color: #FAC12E;
+            line-height: 1;
+            margin-bottom: 30px;
+
+            span {
+                font-size: 18px;
+                font-weight: 400;
+                color: #fff;
+            }
+        }
+        
+        
+        .br-line {
+            width: 100%;
+            height: 1px;
+            background: #fff;
+            opacity: 20%;
+            margin-bottom: 20px;
+        }
+
+        
+        
+        .card-features {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            li {
+                color: #fff;
+                display: inline-flex;
+                align-items: center;
+                gap: 10px;
+
+                .icon {
+                    width: 28px;
+                    height: 28px;
+                    border: 1px solid rgb(255 255 255 / 18%);
+                    border-radius: 50%;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: #FAC12E;
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+    
+
+    
+    &-tabs {
+        &-btn {
+            display: flex;
+            border-bottom: 1px solid rgb(255 255 255 / 16%);
+            flex-wrap: wrap;
+
+            .nav-link {
+                background: transparent;
+                color: rgb(255 255 255 / 72%);
+                font-size: 18px;
+                font-weight: 500;
+                border-radius: 10px 10px 0 0;
+                padding: 10px 12px;
+                transition: .5s var(--lt-cube-1);
+
+                &:hover {
+                    background: var(--lt-clr-pr-1);
+                    color: #fff;
+                }
+
+                &:is(.active) {
+                    background: var(--lt-clr-pr-1);
+                    color: #fff;
+                }
+            }
+        }
+    }
+
+    &-toggle-btn {
+        display: flex;
+        border: 3px solid rgb(255 255 255 / 8%);
+        border-radius: 16px;
+        padding: 8px;
+
+        @media #{$xs} {
+            flex-wrap: wrap;
+        }
+
+        @media #{$sm} {
+            flex-wrap: nowrap;
+        }
+
+        .single-btn {
+            font-weight: 500;
+            color: #fff;
+            font-size: 18px;
+            padding: 12px 22px;
+            border-radius: 10px;
+            cursor: pointer;
+            
+
+            span {
+                font-size: 14px;
+                color: #FAC12E;
+            }
+
+            &:is(.active) {
+                background-color: var(--lt-clr-h-1);
+            }
+        }
+    }
+    
+
+    &-right {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+
+        @media #{$xs} {
+            grid-template-columns: 1fr;
+        }
+
+        @media #{$sm} {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        &-card {
+            background-color: #003865;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 32px 24px;
+            border: 2px solid rgb(255 255 255 / 24%);
+            gap: 30px;
+
+            .number {
+                font-size: 80px;
+                color: #fff;
+                line-height: 1;
+                font-weight: 500;
+
+                @media #{$xxl,$xl,$lg,$md,$xs} {
+                    font-size: 40px;
+                }
+
+                span {
+                    font-size: 44px;
+                    color: #FAC12E;
+
+                    @media #{$xxl,$xl,$lg,$md,$xs} {
+                        font-size: 22px;
+                    }
+                }
+            }
+
+            .disc {
+                font-size: 16px;
+                color: #fff;
+                opacity: 80%;
+            }
+            
+
+            &:first-child {
+                background-color: var(--lt-clr-pr-1);
+            }
+
+            &:last-child {
+                background-color: #FAC12E;
+                .number, .disc {
+                    color: var(--lt-clr-h-1);
+
+                    span {
+                        color: #fff;
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    &-ani-img {
+        width: 25%;
+        text-align: right;
+        position: absolute;
+        top: 4%;
+        right: 4%;
+        z-index: -1;
+    }
+
+
+
+    
+}
+
+
+
+/* 
+    price-1-end
+*/

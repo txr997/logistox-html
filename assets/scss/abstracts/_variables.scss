@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root {
+  scroll-behavior: smooth;
+
+  --lt-font-1: "Space Grotesk", sans-serif;
+  --lt-font-2: "Inter", sans-serif;
+
+  --lt-clr-pr-1: #F94627;
+  --lt-clr-sd-1: #003865;
+  
+  --lt-clr-h-1: #0A1F43;
+  --lt-clr-p-1: #5D6167;
+
+  --lt-cube-1: cubic-bezier(0.16, 1, 0.3, 1);
+
+}
+
+$over: "(min-width: 1800px)";
+$xxxl: "only screen and (min-width: 1600px) and (max-width: 1799px)";
+$xxl: "only screen and (min-width: 1400px) and (max-width: 1599px)";
+$xl: "only screen and (min-width: 1200px) and (max-width: 1399px)";
+$lg: "only screen and (min-width: 992px) and (max-width: 1199px)";
+$md: "only screen and (min-width: 768px) and (max-width: 991px)";
+$sm: "only screen and (min-width: 576px) and (max-width: 767px)";
+$xs: "(max-width: 767px)";
