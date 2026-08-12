@@ -9,13 +9,28 @@
 "use strict";
 
 
-/* 
+/*
+	no-scroll-restore — a reload half-way down the page would otherwise put the
+	browser back at that offset after the scroll-driven triggers were measured,
+	leaving every start/end point off by the restored amount
+*/
+if ("scrollRestoration" in history) {
+	history.scrollRestoration = "manual";
+}
+
+
+/*
 	windows-load-function
 */
 
 
 window.addEventListener('load', function(){
 
+	// drop any scroll position gsap/the browser remembered, then measure the
+	// triggers from a clean top-of-page state
+	ScrollTrigger.clearScrollMemory("manual");
+	window.scrollTo(0, 0);
+	ScrollTrigger.refresh();
 
 	if (document.querySelectorAll(".lt-preloader-1").length) {
 		const loader = document.querySelector(".lt-preloader-1");
@@ -43,10 +58,6 @@ window.addEventListener('load', function(){
 	after-preloader-start
 */
 function afterPreloader() {
-
-	// clip-reveal-images
-	waClipAnim();
-
 
 	/*
 		only-LTR-direction
@@ -174,9 +185,121 @@ function afterPreloader() {
 				}, "-=.7");
 		}
 
+				
+		// footer-big-title — the letters keep driving in and out like a convoy
+		function waFooterTitleAnim() {
+			gsap.registerPlugin(SplitText);
+
+			var lt_footer_title = new SplitText(".lt-footer-1-big-title", {
+				type: "chars",
+				charsClass: "split-char"
+			});
+
+			var lt_footer_title_tl = gsap.timeline({
+				repeat: -1,
+				repeatDelay: .6,
+				paused: true
+			});
+
+			lt_footer_title_tl
+				.fromTo(lt_footer_title.chars, {
+					xPercent: -160,
+					skewX: 24,
+					opacity: 0
+				}, {
+					xPercent: 0,
+					skewX: 0,
+					opacity: 1,
+					duration: 1,
+					ease: "power3.out",
+					stagger: .07
+				})
+				.to(lt_footer_title.chars, {
+					xPercent: 160,
+					skewX: -24,
+					opacity: 0,
+					duration: .8,
+					ease: "power2.in",
+					stagger: .06
+				}, "+=1.6");
+
+			// only run the loop while the footer is on screen — always from the top,
+			// so it never resumes half-way through a letter fly-out
+			ScrollTrigger.create({
+				trigger: ".lt-footer-1-big-title",
+				start: "top bottom",
+				end: "bottom top",
+				markers: false,
+				onToggle: function (self) {
+					if (self.isActive) {
+						lt_footer_title_tl.restart(true);
+					} else {
+						lt_footer_title_tl.pause(0);
+					}
+				}
+				
+			});
+
+			// the layout shifts while images load — re-measure the trigger
+			ScrollTrigger.refresh();
+		}
+		waFooterTitleAnim();
+
 	}
 
 
+	/*
+		clip-anim-start
+	*/
+	function waClipAnim() {
+
+		const waClipWraps = document.querySelectorAll(".wa_clip_anim");
+		if (!waClipWraps.length) return;
+
+		const waClipObserver = new IntersectionObserver((entries, obs) => {
+			entries.forEach((entry) => {
+				if (!entry.isIntersecting) return;
+
+				const wrap = entry.target;
+				const img = wrap.querySelector(".wa_clip_anim_img[data-animate='true']");
+				if (!img) return;
+
+				const url = img.getAttribute("src");
+
+				// ensure relative position
+				if (getComputedStyle(wrap).position === "static") {
+					wrap.style.position = "relative";
+				}
+
+				// remove old masks
+				wrap.querySelectorAll(".mask").forEach((mask) => mask.remove());
+
+				const waClipFragment = document.createDocumentFragment();
+
+				for (let i = 0; i < 9; i++) {
+					const mask = document.createElement("div");
+					mask.className = `mask mask-${i + 1}`;
+					mask.style.backgroundImage = `url(${url})`;
+					waClipFragment.appendChild(mask);
+				}
+
+				wrap.appendChild(waClipFragment);
+
+				// paint the closed state first, then play the reveal
+				requestAnimationFrame(function () {
+					requestAnimationFrame(function () {
+						wrap.classList.add("animated");
+					});
+				});
+
+				// stop observing after trigger
+				obs.unobserve(wrap);
+			});
+		}, { threshold: 0.2 });
+
+		waClipWraps.forEach((wrap) => waClipObserver.observe(wrap));
+	}
+	waClipAnim();
 /*
 	after-preloader-end
 */
@@ -208,7 +331,6 @@ function afterPageLoad() {
 	});
 
 
-
 	/* 
 		wow-activation
 	*/
@@ -222,8 +344,6 @@ function afterPageLoad() {
 		});
 		wow.init();
 	};
-
-
 
 
 		
@@ -274,57 +394,7 @@ if ($(".wa_magnetic_1_trigger").length) {
     }
 }
 
-/*
-	clip-anim-start
-*/
-function waClipAnim() {
 
-	const waClipWraps = document.querySelectorAll(".wa_clip_anim");
-	if (!waClipWraps.length) return;
-
-	const waClipObserver = new IntersectionObserver((entries, obs) => {
-		entries.forEach((entry) => {
-			if (!entry.isIntersecting) return;
-
-			const wrap = entry.target;
-			const img = wrap.querySelector(".wa_clip_anim_img[data-animate='true']");
-			if (!img) return;
-
-			const url = img.getAttribute("src");
-
-			// ensure relative position
-			if (getComputedStyle(wrap).position === "static") {
-				wrap.style.position = "relative";
-			}
-
-			// remove old masks
-			wrap.querySelectorAll(".mask").forEach((mask) => mask.remove());
-
-			const waClipFragment = document.createDocumentFragment();
-
-			for (let i = 0; i < 9; i++) {
-				const mask = document.createElement("div");
-				mask.className = `mask mask-${i + 1}`;
-				mask.style.backgroundImage = `url(${url})`;
-				waClipFragment.appendChild(mask);
-			}
-
-			wrap.appendChild(waClipFragment);
-
-			// paint the closed state first, then play the reveal
-			requestAnimationFrame(function () {
-				requestAnimationFrame(function () {
-					wrap.classList.add("animated");
-				});
-			});
-
-			// stop observing after trigger
-			obs.unobserve(wrap);
-		});
-	}, { threshold: 0.2 });
-
-	waClipWraps.forEach((wrap) => waClipObserver.observe(wrap));
-}
 /*
 	clip-anim-end
 */
@@ -375,10 +445,13 @@ if($(".lt-solution-1-height").length) {
 	var lt_solution_tabs = document.querySelectorAll(".lt-solution-1-tabs-btn .nav-link");
 	var lt_solution_index = 0;
 
+
+
 	if (lt_solution_truk_img && lt_solution_tabs.length) {
 
-		// desktop only — below 1200px the tabs stay click-driven
-		gsap.matchMedia().add("(min-width: 1600px)", function () {
+		// only where the section is pinned — keep in sync with the sticky/height
+		// media query in scss/layout/_solution.scss
+		gsap.matchMedia().add("(min-width: 1800px)", function () {
 			lt_solution_index = 0;
 
 			gsap.to(lt_solution_truk_img, {
@@ -391,7 +464,6 @@ if($(".lt-solution-1-height").length) {
 					start: "top top",
 					end: "bottom bottom",
 					scrub: 1,
-					invalidateOnRefresh: true,
 					markers: false,
 
 					// each third of the scroll owns one tab
@@ -515,87 +587,10 @@ if($(".lt-blog-1-btn-wrap").length) {
 }
 
 
-// footer-big-title — the letters keep driving in and out like a convoy
-if($(".lt-footer-1-big-title").length) {
-
-	// wait for the display font, otherwise the split measures fallback glyphs
-	if (document.fonts && document.fonts.ready) {
-		document.fonts.ready.then(waFooterTitleAnim);
-	} else {
-		waFooterTitleAnim();
-	}
-}
-
-function waFooterTitleAnim() {
-	gsap.registerPlugin(SplitText);
-
-	var lt_footer_title = new SplitText(".lt-footer-1-big-title", {
-		type: "chars",
-		charsClass: "split-char"
-	});
-
-	var lt_footer_title_tl = gsap.timeline({
-		repeat: -1,
-		repeatDelay: .6,
-		paused: true
-	});
-
-	lt_footer_title_tl
-		.fromTo(lt_footer_title.chars, {
-			xPercent: -160,
-			skewX: 24,
-			opacity: 0
-		}, {
-			xPercent: 0,
-			skewX: 0,
-			opacity: 1,
-			duration: 1,
-			ease: "power3.out",
-			stagger: .07
-		})
-		.to(lt_footer_title.chars, {
-			xPercent: 160,
-			skewX: -24,
-			opacity: 0,
-			duration: .8,
-			ease: "power2.in",
-			stagger: .06
-		}, "+=1.6");
-
-	// only run the loop while the footer is on screen — always from the top,
-	// so it never resumes half-way through a letter fly-out
-	ScrollTrigger.create({
-		trigger: ".lt-footer-1-big-title",
-		start: "top bottom",
-		end: "bottom top",
-		onToggle: function (self) {
-			if (self.isActive) {
-				lt_footer_title_tl.restart(true);
-			} else {
-				lt_footer_title_tl.pause(0);
-			}
-		}
-	});
-
-	// the layout shifts while images load — re-measure the trigger
-	ScrollTrigger.refresh();
-}
 
 
 
-// accordion-active-class
-if ($(".wa_accordion_item").length) {
-	document.querySelectorAll(".wa_accordion_item .accordion-collapse").forEach((collapse) => {
-		const item = collapse.closest(".wa_accordion_item");
-
-		collapse.addEventListener("show.bs.collapse", function () {
-			item.classList.add("active");
-		});
-		collapse.addEventListener("hide.bs.collapse", function () {
-			item.classList.remove("active");
-		});
-	});
-}
+/* accordion-active-class lives in main-common.js (faqs-active-class) */
 
 // clients-1-slider
 var lt_services1_slider = new Swiper(".lt_services1_slider", {

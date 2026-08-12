@@ -232,20 +232,15 @@
 
 .lt-solution-1 {
     &-height {
-        height: 200vh;
-        position: relative;
-
-        /* no scroll-driven tabs below 1200px */
-        @media #{$xxxl,$xxl,$xl,$lg,$md,$xs} {
-            height: auto;
+        @media #{$over} {
+            height: 200vh;
+            position: relative;
         }
     }
     &-pin {
-        position: sticky;
-        top: 50px;
-
-        @media #{$xxxl,$xxl,$xl,$lg,$md,$xs} {
-            position: static;
+        @media #{$over} {
+            position: sticky;
+            top: 50px;
         }
     }
 }

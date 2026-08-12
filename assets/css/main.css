@@ -2706,12 +2706,22 @@ input:focus::placeholder, textarea:focus::placeholder {
 /* 
     partner-1-start
 */
+.lt-partner-1-bg-color {
+  position: absolute;
+  top: -50px;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+  height: 119%;
+}
 .lt-partner-1-title {
   font-size: 28px;
   color: rgba(10, 31, 67, 0.6);
   text-align: center;
   font-weight: 500;
   margin-bottom: 50px;
+  position: relative;
+  z-index: 3;
 }
 .lt-partner-1-title span {
   color: var(--lt-clr-h-1);
@@ -2943,7 +2953,7 @@ input:focus::placeholder, textarea:focus::placeholder {
   top: 0;
   left: 0;
   width: 100%;
-  height: 705px;
+  height: 711px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   z-index: -1;
@@ -3128,10 +3138,14 @@ input:focus::placeholder, textarea:focus::placeholder {
   align-items: center;
   justify-content: center;
   color: #fff;
+  transition: 0.5s var(--lt-cube-1);
 }
 .lt-services-1-slider-btn .single-btn:last-child {
   background: rgba(10, 31, 67, 0.12);
   color: var(--lt-clr-h-1);
+}
+.lt-services-1-slider-btn .single-btn:hover {
+  background-color: var(--lt-clr-pr-1);
 }
 .lt-services-1-slider-btn .lt_services1_slider_pagination {
   display: inline-flex;
@@ -3539,23 +3553,16 @@ input:focus::placeholder, textarea:focus::placeholder {
   border-top: 1px dashed rgba(10, 31, 67, 0.2);
   margin: 0 24px;
 }
-.lt-solution-1-height {
-  height: 200vh;
-  position: relative;
-  /* no scroll-driven tabs below 1200px */
-}
-@media only screen and (min-width: 1600px) and (max-width: 1799px), only screen and (min-width: 1400px) and (max-width: 1599px), only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), (max-width: 767px) {
+@media (min-width: 1800px) {
   .lt-solution-1-height {
-    height: auto;
+    height: 200vh;
+    position: relative;
   }
 }
-.lt-solution-1-pin {
-  position: sticky;
-  top: 50px;
-}
-@media only screen and (min-width: 1600px) and (max-width: 1799px), only screen and (min-width: 1400px) and (max-width: 1599px), only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), (max-width: 767px) {
+@media (min-width: 1800px) {
   .lt-solution-1-pin {
-    position: static;
+    position: sticky;
+    top: 50px;
   }
 }
 
