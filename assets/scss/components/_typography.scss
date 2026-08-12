@@ -75,7 +75,25 @@
 }
 
 
-/* 
+/*
+    split-line-animation
+*/
+.wa_title_ani_1 {
+
+    /* outer line masks the inner one while it slides in */
+    .wa-split-mask {
+        overflow: hidden;
+        padding-bottom: .12em;
+        margin-bottom: -.12em;
+    }
+
+    .wa-split-line {
+        will-change: transform, opacity;
+    }
+}
+
+
+/*
     typography-end
 */
 

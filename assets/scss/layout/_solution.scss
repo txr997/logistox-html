@@ -32,6 +32,13 @@
     
     &-truk {
         border-bottom: 1px solid rgb(10 31 67 / 20%);
+        overflow: hidden;
+
+        /* driven left-to-right by the pinned scroll */
+        .truk-img {
+            width: fit-content;
+            will-change: transform;
+        }
     }
     
 
@@ -222,6 +229,26 @@
     }
 }
 
+
+.lt-solution-1 {
+    &-height {
+        height: 200vh;
+        position: relative;
+
+        /* no scroll-driven tabs below 1200px */
+        @media #{$xxxl,$xxl,$xl,$lg,$md,$xs} {
+            height: auto;
+        }
+    }
+    &-pin {
+        position: sticky;
+        top: 50px;
+
+        @media #{$xxxl,$xxl,$xl,$lg,$md,$xs} {
+            position: static;
+        }
+    }
+}
 /* 
     solution-1-end
 */

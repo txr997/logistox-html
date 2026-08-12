@@ -146,6 +146,24 @@
             @media #{$xs} {
                 font-size: 20px;
             }
+
+            /* underline wipes in from the left, on every line */
+            a {
+                display: inline;
+                background-image: linear-gradient(var(--lt-clr-pr-1), var(--lt-clr-pr-1));
+                background-repeat: no-repeat;
+                background-size: 0% 1px;
+                background-position: right bottom;
+                -webkit-box-decoration-break: clone;
+                box-decoration-break: clone;
+                transition: background-size .5s var(--lt-cube-1), color .4s var(--lt-cube-1);
+
+                &:hover {
+                    color: var(--lt-clr-pr-1);
+                    background-size: 100% 1px;
+                    background-position: left bottom;
+                }
+            }
         }
 
         .disc {

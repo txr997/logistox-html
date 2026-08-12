@@ -106,6 +106,24 @@
             @media #{$xxl,$xl,$lg,$md,$xs} {
                 font-size: 20px;
             }
+
+            /* underline wipes in from the left, on every line */
+            a {
+                display: inline;
+                background-image: linear-gradient(var(--lt-clr-pr-1), var(--lt-clr-pr-1));
+                background-repeat: no-repeat;
+                background-size: 0% 1px;
+                background-position: right bottom;
+                -webkit-box-decoration-break: clone;
+                box-decoration-break: clone;
+                transition: background-size .5s var(--lt-cube-1), color .4s var(--lt-cube-1);
+
+                &:hover {
+                    color: var(--lt-clr-pr-1);
+                    background-size: 100% 1px;
+                    background-position: left bottom;
+                }
+            }
         }
         
         .disc {
@@ -123,6 +141,37 @@
             align-items: center;
             gap: 6px;
             padding: 8px 18px;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            transition: color .5s var(--lt-cube-1);
+
+            /* hover-fill sliding in from the left */
+            &::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                z-index: -1;
+                background-color: var(--lt-clr-pr-1);
+                transform: translateX(-101%);
+                transition: transform .5s var(--lt-cube-1);
+            }
+
+            i {
+                transition: .5s var(--lt-cube-1);
+            }
+
+            &:hover {
+                color: #fff;
+
+                &::before {
+                    transform: translateX(0);
+                }
+
+                i {
+                    transform: translate(3px, -3px);
+                }
+            }
         }
 
         .front-content {
@@ -154,6 +203,8 @@
 
             .icon-elm {
                 margin-bottom: 0;
+                background-color: rgb(249 70 39 / 8%);
+                color: var(--lt-clr-pr-1);
             }
         }
 

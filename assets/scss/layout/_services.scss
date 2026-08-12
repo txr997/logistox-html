@@ -62,9 +62,15 @@
     }
 
     &-card {
+        transition: .5s var(--lt-cube-1);
+
         .img-elm {
             height: 205px;
             border-radius: 10px 10px 0 0;
+
+            img {
+                transition: 1s var(--lt-cube-1);
+            }
         }
         .icon-elm {
             width: 88px;
@@ -80,6 +86,11 @@
             z-index: 1;
             margin-bottom: 32px;
             transition: .5s var(--lt-cube-1);
+
+            i {
+                display: inline-flex;
+                transition: .5s var(--lt-cube-1);
+            }
 
             &::after {
                 content: "";
@@ -114,6 +125,10 @@
         .title {
             font-size: 24px;
             margin-bottom: 16px;
+
+            a {
+                transition: .4s var(--lt-cube-1);
+            }
         }
         .disc {
             margin-bottom: 25px;
@@ -130,16 +145,28 @@
             align-items: center;
             justify-content: space-between;
             padding: 16px 36px;
+            transition: .5s var(--lt-cube-1);
 
             i {
                 font-size: 20px;
                 color: var(--lt-clr-pr-1);
+                transition: .5s var(--lt-cube-1);
             }
         }
 
         &:hover {
+            .img-elm {
+                img {
+                    transform: scale(1.08);
+                }
+            }
+
             .icon-elm {
                 background-color: var(--lt-clr-pr-1);
+
+                i {
+                    transform: rotate(-8deg) scale(1.08);
+                }
 
                 &::after {
                     background-color: #991A04;
@@ -149,8 +176,24 @@
                     background-color: #991A04;
                 }
             }
+
+            .title {
+                a {
+                    color: var(--lt-clr-pr-1);
+                }
+            }
+
+            .btn-elm {
+                background-color: var(--lt-clr-sd-1);
+                color: #fff;
+
+                i {
+                    color: #fff;
+                    transform: translate(4px, -4px);
+                }
+            }
         }
-        
+
     }
 
 

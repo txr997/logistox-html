@@ -9,6 +9,34 @@
     font-size: 24px;
     background: transparent;
     color: #fff;
+    transition: .5s var(--lt-cube-1);
+
+    &:hover {
+        color: var(--lt-clr-pr-1);
+        transform: scale(1.1);
+    }
+}
+
+@keyframes lt-pr-btn-1-icon {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    45% {
+        transform: translateX(130%);
+        opacity: 0;
+    }
+
+    55% {
+        transform: translateX(-130%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
 .lt-pr-btn-1 {
@@ -19,34 +47,69 @@
     font-weight: 700;
     display: inline-flex;
 
-    .text {
+    .text,
+    .icon {
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
         background-color: var(--lt-clr-pr-1);
         border-radius: 10px;
-        padding: 14px 23px;
         border-top: 2px solid rgb(255 255 255 / 40%);
         border-bottom: 2px solid rgb(255 255 255 / 40%);
+
+        /* hover-fill sliding in from the left */
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background-color: var(--lt-clr-sd-1);
+            transform: translateX(-101%);
+            transition: transform .5s var(--lt-cube-1);
+        }
+    }
+
+    .text {
+        padding: 14px 23px;
         flex: 0 0 auto;
     }
 
     .icon {
-        background-color: var(--lt-clr-pr-1);
-        border-radius: 10px;
-        border-top: 2px solid rgb(255 255 255 / 40%);
-        border-bottom: 2px solid rgb(255 255 255 / 40%);
         font-size: 29px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
         width: 56px;
+
+        i {
+            display: inline-flex;
+        }
     }
 
-    &:is(.has-v2) {
-        .text {
-            background: var(--lt-clr-sd-1);
+    &:hover {
+        color: #fff;
+        .text,
+        .icon {
+            &::before {
+                transform: translateX(0);
+            }
         }
 
         .icon {
-            background: var(--lt-clr-sd-1);
+            i {
+                animation: lt-pr-btn-1-icon .6s var(--lt-cube-1);
+            }
+        }
+    }
+
+    &:is(.has-v2) {
+        .text,
+        .icon {
+            background-color: var(--lt-clr-sd-1);
+
+            &::before {
+                background-color: var(--lt-clr-pr-1);
+            }
         }
     }
 }
@@ -61,10 +124,21 @@
     align-items: center;
     font-size: 16px;
     gap: 8px;
-
+    transition: .5s var(--lt-cube-1);
     i {
         color: #fff;
         font-size: 24px;
+        transition: .5s var(--lt-cube-1);
+    }
+
+
+    &:hover {
+        color: var(--lt-clr-pr-1);
+        transform: scale(1.1);
+
+        i {
+            color: var(--lt-clr-pr-1);
+        }
     }
 }
 

@@ -44,8 +44,11 @@ window.addEventListener('load', function(){
 */
 function afterPreloader() {
 
+	// clip-reveal-images
+	waClipAnim();
 
-	/* 
+
+	/*
 		only-LTR-direction
 	*/
 	if (getComputedStyle(document.body).direction !== "rtl") {
@@ -93,58 +96,83 @@ function afterPreloader() {
 		}
 
 
-		// footer-big-title — the letters keep driving in and out like a convoy
-		if($(".lt-footer-1-big-title").length) {
+		// section-title-1 — lines slide up from behind their own mask
+		if($(".wa_title_ani_1").length) {
 			gsap.registerPlugin(SplitText);
 
-			var lt_footer_title = new SplitText(".lt-footer-1-big-title", {
-				type: "chars",
-				charsClass: "split-char"
-			});
+			$(".wa_title_ani_1").each(function (index, el) {
 
-			var lt_footer_title_tl = gsap.timeline({
-				repeat: -1,
-				repeatDelay: .6,
-				paused: true
-			});
+				// double split: the second pass wraps each line in a mask
+				var wa_title_line = new SplitText(el, {
+					type: "lines",
+					linesClass: "wa-split-line"
+				});
+				new SplitText(el, {
+					type: "lines",
+					linesClass: "wa-split-mask"
+				});
 
-			lt_footer_title_tl
-				.fromTo(lt_footer_title.chars, {
-					xPercent: -160,
-					skewX: 24,
+				var wa_title_delay = parseFloat($(el).attr('data-split-delay')) || 0;
+
+				gsap.set(wa_title_line.lines, {
+					yPercent: 110,
 					opacity: 0
-				}, {
-					xPercent: 0,
-					skewX: 0,
-					opacity: 1,
-					duration: 1,
-					ease: "power3.out",
-					stagger: .07
-				})
-				.to(lt_footer_title.chars, {
-					xPercent: 160,
-					skewX: -24,
-					opacity: 0,
-					duration: .8,
-					ease: "power2.in",
-					stagger: .06
-				}, "+=1.6");
+				});
 
-			// only run the loop while the footer is on screen
-			ScrollTrigger.create({
-				trigger: ".lt-footer-1-big-title",
-				start: "top bottom",
-				end: "bottom top",
-				onToggle: function (self) {
-					if (self.isActive) {
-						lt_footer_title_tl.play();
-					} else {
-						lt_footer_title_tl.pause();
-					}
-				}
+				gsap.to(wa_title_line.lines, {
+					scrollTrigger: {
+						trigger: el,
+						start: "top 86%",
+					},
+					yPercent: 0,
+					opacity: 1,
+					duration: .9,
+					ease: "power3.out",
+					stagger: .1,
+					delay: wa_title_delay
+				});
+
 			});
 		}
 
+
+		// hero-1-intro — everything else rides in right behind the titles
+		if($(".wa_hero_ani_1").length) {
+			var wa_hero_ani_1_tl = gsap.timeline({ delay: .25 });
+
+			wa_hero_ani_1_tl
+				.from(".wa_hero_ani_1 .lt-subtitle-1", {
+					y: 24,
+					opacity: 0,
+					duration: .8,
+					ease: "power3.out"
+				})
+				.from(".wa_hero_ani_1 .lt-hero-1-truck", {
+					opacity: 0,
+					duration: .8,
+					ease: "power3.out"
+				}, "-=.35")
+				.from(".wa_hero_ani_1 .lt-hero-1-disc", {
+					y: 24,
+					opacity: 0,
+					duration: .8,
+					ease: "power3.out"
+				}, "-=.5")
+				.from(".wa_hero_ani_1 .btn-elm > *", {
+					y: 24,
+					opacity: 0,
+					duration: .8,
+					stagger: .12,
+					ease: "power3.out"
+				}, "-=.5")
+				.from(".wa_hero_ani_1 .lt-hero-1-accordion-item", {
+					x: 40,
+					opacity: 0,
+					duration: .8,
+					stagger: .12,
+					ease: "power3.out"
+				}, "-=.7");
+		}
 
 	}
 
@@ -244,6 +272,329 @@ if ($(".wa_magnetic_1_trigger").length) {
             });
         });
     }
+}
+
+/*
+	clip-anim-start
+*/
+function waClipAnim() {
+
+	const waClipWraps = document.querySelectorAll(".wa_clip_anim");
+	if (!waClipWraps.length) return;
+
+	const waClipObserver = new IntersectionObserver((entries, obs) => {
+		entries.forEach((entry) => {
+			if (!entry.isIntersecting) return;
+
+			const wrap = entry.target;
+			const img = wrap.querySelector(".wa_clip_anim_img[data-animate='true']");
+			if (!img) return;
+
+			const url = img.getAttribute("src");
+
+			// ensure relative position
+			if (getComputedStyle(wrap).position === "static") {
+				wrap.style.position = "relative";
+			}
+
+			// remove old masks
+			wrap.querySelectorAll(".mask").forEach((mask) => mask.remove());
+
+			const waClipFragment = document.createDocumentFragment();
+
+			for (let i = 0; i < 9; i++) {
+				const mask = document.createElement("div");
+				mask.className = `mask mask-${i + 1}`;
+				mask.style.backgroundImage = `url(${url})`;
+				waClipFragment.appendChild(mask);
+			}
+
+			wrap.appendChild(waClipFragment);
+
+			// paint the closed state first, then play the reveal
+			requestAnimationFrame(function () {
+				requestAnimationFrame(function () {
+					wrap.classList.add("animated");
+				});
+			});
+
+			// stop observing after trigger
+			obs.unobserve(wrap);
+		});
+	}, { threshold: 0.2 });
+
+	waClipWraps.forEach((wrap) => waClipObserver.observe(wrap));
+}
+/*
+	clip-anim-end
+*/
+
+
+// about-1-container — lands from above, then keeps swinging
+if($(".lt-about-1-posi-img").length) {
+	var lt_about_posi_tl = gsap.timeline({
+		scrollTrigger: {
+			trigger: ".lt-about-1-area",
+			start: "top 30%",
+		}
+	});
+
+	lt_about_posi_tl
+		.from(".lt-about-1-posi-img", {
+			yPercent: -100,
+			duration: 1.3,
+			ease: "power3.out"
+		})
+		.from(".lt-about-1-img-2", {
+			yPercent: -70,
+			duration: 1.3,
+			ease: "power3.out"
+		},"<")
+		.set(".lt-about-1-posi-img", {
+			transformOrigin: "top center"
+		})
+		.to(".lt-about-1-posi-img", {
+			rotation: 2.2,
+			duration: 1.6,
+			ease: "sine.inOut"
+		})
+		.to(".lt-about-1-posi-img", {
+			rotation: -2.2,
+			duration: 3.2,
+			ease: "sine.inOut",
+			yoyo: true,
+			repeat: -1
+		});
+}
+
+
+// solution-1-scroll — the truck drives across while the tabs switch
+if($(".lt-solution-1-height").length) {
+	var lt_solution_truk = document.querySelector(".lt-solution-1-truk");
+	var lt_solution_truk_img = document.querySelector(".lt-solution-1-truk .truk-img");
+	var lt_solution_tabs = document.querySelectorAll(".lt-solution-1-tabs-btn .nav-link");
+	var lt_solution_index = 0;
+
+	if (lt_solution_truk_img && lt_solution_tabs.length) {
+
+		// desktop only — below 1200px the tabs stay click-driven
+		gsap.matchMedia().add("(min-width: 1600px)", function () {
+			lt_solution_index = 0;
+
+			gsap.to(lt_solution_truk_img, {
+				x: function () {
+					return lt_solution_truk.offsetWidth - lt_solution_truk_img.offsetWidth;
+				},
+				ease: "none",
+				scrollTrigger: {
+					trigger: ".lt-solution-1-height",
+					start: "top top",
+					end: "bottom bottom",
+					scrub: 1,
+					invalidateOnRefresh: true,
+					markers: false,
+
+					// each third of the scroll owns one tab
+					onUpdate: function (self) {
+						var index = Math.min(lt_solution_tabs.length - 1, Math.floor(self.progress * lt_solution_tabs.length));
+
+						if (index !== lt_solution_index) {
+							lt_solution_index = index;
+							bootstrap.Tab.getOrCreateInstance(lt_solution_tabs[index]).show();
+						}
+					}
+				}
+			});
+		});
+	}
+}
+
+
+// price-1-ani-img — grows in from the top-right corner as the section scrolls up
+if($(".lt-price-1-ani-img").length) {
+	gsap.from(".lt-price-1-ani-img", {
+		scrollTrigger: {
+			trigger: ".lt-price-1-ani-img",
+			start: "top bottom",
+			end: "top 35%",
+			scrub: 1,
+		},
+		scale: .45,
+		xPercent: 18,
+		yPercent: -18,
+		transformOrigin: "top right",
+		ease: "none"
+	});
+}
+
+
+// projects-1-ani-img — drives in from the right as the section scrolls up
+if($(".lt-projects-1-ani-img").length) {
+	gsap.from(".lt-projects-1-ani-img", {
+		scrollTrigger: {
+			trigger: ".lt-projects-1-ani-img",
+			start: "top bottom",
+			end: "top 35%",
+			scrub: 1,
+		},
+		xPercent: 280,
+		ease: "none"
+	});
+}
+
+
+// choose-1-ship — sails in small from the right and grows into place
+if($(".lt-choose-1-bg-ani .bg-ship").length) {
+	gsap.from(".lt-choose-1-bg-ani .bg-ship", {
+		scrollTrigger: {
+			trigger: ".lt-choose-1-bg-ani",
+			start: "top bottom",
+			end: "top 35%",
+			scrub: 1,
+		},
+		scale: .35,
+		xPercent: 70,
+		transformOrigin: "right center",
+		ease: "none"
+	});
+}
+
+
+// process-1-bg — drives in from the right as the section scrolls up
+if($(".lt-process-1-bg-img").length) {
+	gsap.from(".lt-process-1-bg-img", {
+		scrollTrigger: {
+			trigger: ".lt-process-1-bg-img",
+			start: "top bottom",
+			end: "top 35%",
+			scrub: 1,
+		},
+		xPercent: 280,
+		ease: "none"
+	});
+}
+
+
+// blog-1-btn-wrap — the rails draw out and the dots ride in from both sides
+if($(".lt-blog-1-btn-wrap").length) {
+	var lt_blog_btn_lines = document.querySelectorAll(".lt-blog-1-btn-wrap .line");
+	var lt_blog_btn_dots = document.querySelectorAll(".lt-blog-1-btn-wrap .dot-elm");
+
+	var lt_blog_btn_tl = gsap.timeline({
+		scrollTrigger: {
+			trigger: ".lt-blog-1-btn-wrap",
+			start: "top 88%",
+		}
+	});
+
+	lt_blog_btn_tl
+		.from(lt_blog_btn_lines[0], {
+			scaleX: 0,
+			transformOrigin: "left center",
+			duration: 1,
+			ease: "power3.out"
+		})
+		.from(lt_blog_btn_lines[1], {
+			scaleX: 0,
+			transformOrigin: "right center",
+			duration: 1,
+			ease: "power3.out"
+		}, "<")
+		.from(lt_blog_btn_dots[0], {
+			x: -60,
+			opacity: 0,
+			duration: .8,
+			ease: "power3.out"
+		}, "-=.6")
+		.from(lt_blog_btn_dots[1], {
+			x: 60,
+			opacity: 0,
+			duration: .8,
+			ease: "power3.out"
+		}, "<");
+}
+
+
+// footer-big-title — the letters keep driving in and out like a convoy
+if($(".lt-footer-1-big-title").length) {
+
+	// wait for the display font, otherwise the split measures fallback glyphs
+	if (document.fonts && document.fonts.ready) {
+		document.fonts.ready.then(waFooterTitleAnim);
+	} else {
+		waFooterTitleAnim();
+	}
+}
+
+function waFooterTitleAnim() {
+	gsap.registerPlugin(SplitText);
+
+	var lt_footer_title = new SplitText(".lt-footer-1-big-title", {
+		type: "chars",
+		charsClass: "split-char"
+	});
+
+	var lt_footer_title_tl = gsap.timeline({
+		repeat: -1,
+		repeatDelay: .6,
+		paused: true
+	});
+
+	lt_footer_title_tl
+		.fromTo(lt_footer_title.chars, {
+			xPercent: -160,
+			skewX: 24,
+			opacity: 0
+		}, {
+			xPercent: 0,
+			skewX: 0,
+			opacity: 1,
+			duration: 1,
+			ease: "power3.out",
+			stagger: .07
+		})
+		.to(lt_footer_title.chars, {
+			xPercent: 160,
+			skewX: -24,
+			opacity: 0,
+			duration: .8,
+			ease: "power2.in",
+			stagger: .06
+		}, "+=1.6");
+
+	// only run the loop while the footer is on screen — always from the top,
+	// so it never resumes half-way through a letter fly-out
+	ScrollTrigger.create({
+		trigger: ".lt-footer-1-big-title",
+		start: "top bottom",
+		end: "bottom top",
+		onToggle: function (self) {
+			if (self.isActive) {
+				lt_footer_title_tl.restart(true);
+			} else {
+				lt_footer_title_tl.pause(0);
+			}
+		}
+	});
+
+	// the layout shifts while images load — re-measure the trigger
+	ScrollTrigger.refresh();
+}
+
+
+
+// accordion-active-class
+if ($(".wa_accordion_item").length) {
+	document.querySelectorAll(".wa_accordion_item .accordion-collapse").forEach((collapse) => {
+		const item = collapse.closest(".wa_accordion_item");
+
+		collapse.addEventListener("show.bs.collapse", function () {
+			item.classList.add("active");
+		});
+		collapse.addEventListener("hide.bs.collapse", function () {
+			item.classList.remove("active");
+		});
+	});
 }
 
 // clients-1-slider

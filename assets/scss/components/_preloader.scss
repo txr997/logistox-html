@@ -35,27 +35,6 @@
     }
 }
 
-@keyframes lt-preloader-1-bar {
-    0% {
-        left: -45%;
-    }
-
-    100% {
-        left: 100%;
-    }
-}
-
-@keyframes lt-preloader-1-fade {
-    0%,
-    100% {
-        opacity: .4;
-    }
-
-    50% {
-        opacity: 1;
-    }
-}
-
 .lt-preloader-1 {
     position: fixed;
     inset: 0;
@@ -78,19 +57,8 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 28px;
         width: min(100%, 300px);
         padding: 0 24px;
-    }
-
-    &-logo {
-        img {
-            width: 220px;
-
-            @media #{$xs} {
-                width: 180px;
-            }
-        }
     }
 
     &-road {
@@ -128,43 +96,11 @@
             width: 100%;
             height: 2px;
             border-radius: 2px;
-            background-image: linear-gradient(90deg, rgb(255 255 255 / 24%) 0 18px, rgb(255 255 255 / 0%) 18px 32px);
+            background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.808) 0 18px, rgb(255 255 255 / 0%) 18px 32px);
             background-size: 32px 2px;
             background-repeat: repeat-x;
             animation: lt-preloader-1-road .5s linear infinite;
         }
-    }
-
-    &-bar {
-        position: relative;
-        width: 100%;
-        height: 3px;
-        margin-top: -14px;
-        border-radius: 3px;
-        overflow: hidden;
-        background-color: rgb(255 255 255 / 12%);
-
-        span {
-            position: absolute;
-            top: 0;
-            left: -45%;
-            width: 45%;
-            height: 100%;
-            border-radius: 3px;
-            background-color: var(--lt-clr-pr-1);
-            animation: lt-preloader-1-bar 1.2s var(--lt-cube-1) infinite;
-        }
-    }
-
-    &-label {
-        font-family: var(--lt-font-1);
-        font-size: 13px;
-        font-weight: 500;
-        letter-spacing: .22em;
-        text-transform: uppercase;
-        color: #fff;
-        margin: -6px 0 0;
-        animation: lt-preloader-1-fade 1.6s ease-in-out infinite;
     }
 }
 

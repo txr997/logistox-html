@@ -131,6 +131,7 @@
         .title {
             font-size: 24px;
             line-height: 1.3333;
+            transition: .4s var(--lt-cube-1);
 
             @media #{$xl,$lg} {
                 font-size: 21px;
@@ -231,6 +232,10 @@
             flex: 1 1 auto;
             height: 1px;
             background-color: rgb(0 56 101 / 20%);
+            @media #{$xs} {
+                display: none;
+            }
+
         }
 
         .dot-elm {
@@ -240,6 +245,10 @@
             border-radius: 50%;
             background-color: rgb(10 31 67 / 12%);
             backdrop-filter: blur(6px);
+
+            @media #{$xs} {
+                display: none;
+            }
 
             &::after {
                 content: "";
