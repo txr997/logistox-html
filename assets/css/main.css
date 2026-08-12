@@ -195,7 +195,7 @@ input:focus::placeholder, textarea:focus::placeholder {
     border: none;
   }
   ::-webkit-scrollbar-thumb {
-    background: var(--el-clr-pr-1);
+    background: var(--lt-clr-pr-1);
     border-radius: 6px;
   }
 }
