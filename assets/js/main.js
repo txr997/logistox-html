@@ -587,11 +587,6 @@ if($(".lt-blog-1-btn-wrap").length) {
 }
 
 
-
-
-
-/* accordion-active-class lives in main-common.js (faqs-active-class) */
-
 // clients-1-slider
 var lt_services1_slider = new Swiper(".lt_services1_slider", {
 	loop: true,
@@ -779,6 +774,24 @@ $('.lt-price-1-toggle-btn .single-btn').on('click', function () {
 		if (value === undefined) return;
 		this.firstChild.nodeValue = value + ' ';
 	});
+});
+
+
+var lt_about2_slider = new Swiper(".lt_about2_slider", {
+	loop: true,
+	spaceBetween: 0,
+	speed: 500,
+	slidesPerView: 1,
+	effect: 'fade',
+	fadeEffect: {
+		crossFade: true 
+	},
+	  
+	navigation: {
+		prevEl: ".lt_about2_slider_prev",
+		nextEl: ".lt_about2_slider_next",
+	},
+
 });
 
 

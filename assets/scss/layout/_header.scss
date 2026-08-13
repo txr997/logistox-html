@@ -351,6 +351,57 @@
 */
 
 /* 
+    header-2-start
+*/
+.lt-header-2 {
+    &-area {
+        position: absolute;
+        top: 28px;
+        left: 0;
+        width: 100%;
+        z-index: 3;
+    }
+
+    &-wrap {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        justify-content: space-between;
+    }
+
+    &-action-link {
+        border-radius: 10px;
+        background: var(--lt-clr-sd-1);
+        padding: 6px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+
+        .lt-pr-btn-2 {
+            background: #FFBD12;
+            color: #000;
+            padding: 12px 21px;
+            @media #{$xs} {
+                display: none;
+            }
+            @media #{$sm} {
+                display: inline-flex;
+            }
+        }
+
+        .lt-search-btn-2 {
+            @media #{$xs} {
+                display: none;
+            }
+        }
+    }
+}
+
+/* 
+    header-2-end
+*/
+
+/* 
     sticky-header-css-start
 */
 

@@ -43,6 +43,17 @@
     }
 }
 
+.lt-subtitle-2 {
+    font-family: var(--lt-font-1);
+    display: inline-flex;
+    background-color: #FAC12E;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 4px;
+    color: var(--lt-clr-sd-1);
+    padding: 4px 10px;
+    margin-bottom: 12px;
+}
 
 .lt-sec-title-1 {
     font-family: var(--lt-font-1);
