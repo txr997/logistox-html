@@ -499,3 +499,329 @@
 /*
     projects-1-end
 */
+
+/*
+    projects-2-start
+*/
+.lt-projects-2 {
+    &-sec-title {
+        padding-top: 128px;
+        padding-bottom: 60px;
+
+        @media #{$md,$xs} {
+            padding-top: 90px;
+            padding-bottom: 40px;
+        }
+
+        .lt-sec-title-1 {
+            max-width: 776px;
+            margin: 0 auto 32px;
+            font-size: 92px;
+            line-height: 1;
+
+            @media #{$xxl} {
+                font-size: 80px;
+            }
+
+            @media #{$xl} {
+                font-size: 70px;
+            }
+
+            @media #{$lg} {
+                font-size: 60px;
+            }
+
+            @media #{$md} {
+                font-size: 50px;
+            }
+
+            @media #{$xs} {
+                font-size: 30px;
+            }
+
+            @media #{$sm} {
+                font-size: 40px;
+            }
+        }
+    }
+
+    &-card {
+        position: relative;
+        height: 100vh;
+        overflow: hidden;
+        background-color: var(--lt-clr-h-1);
+
+        /* stacked on top of each other and opened up by the star mask — the
+           mask image itself comes from data-mask-image (main-common.js) */
+        @media #{$over,$xxxl,$xxl,$xl,$lg} {
+            --wa-mask: 14000px;
+            position: absolute;
+            inset: 0;
+            height: 100%;
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+            -webkit-mask-position: center;
+            mask-position: center;
+            -webkit-mask-size: var(--wa-mask) var(--wa-mask);
+            mask-size: var(--wa-mask) var(--wa-mask);
+        }
+
+        /* no pinned reveal here, so the inline mask has to go */
+        @media #{$md,$xs} {
+            -webkit-mask-image: none !important;
+            mask-image: none !important;
+        }
+
+        /* only the un-pinned sizes get a fixed card height */
+        @media #{$md} {
+            height: 620px;
+        }
+
+        @media #{$xs} {
+            height: 560px;
+        }
+
+        .img-elm {
+            position: absolute;
+            inset: 0;
+
+            img {
+                will-change: transform;
+            }
+
+            /* the photo fades into the navy floor of the card */
+            &::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                height: 43%;
+                background: linear-gradient(180deg, rgb(10 31 67 / 0%) 0%, #0A1F43 100%);
+            }
+        }
+
+        .content-wrap {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            padding-bottom: 72px;
+
+            @media #{$lg,$md,$xs} {
+                padding-bottom: 40px;
+            }
+        }
+
+        .tag-elm {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            flex-wrap: wrap;
+            margin-bottom: 32px;
+
+            @media #{$md,$xs} {
+                margin-bottom: 20px;
+            }
+
+            li {
+                font-family: var(--lt-font-2);
+                font-size: 16px;
+                font-weight: 500;
+                color: var(--lt-clr-pr-1);
+                background-color: rgb(241 243 245 / 28%);
+                backdrop-filter: blur(2px);
+                border-radius: 6px;
+                padding: 10px 14px;
+                line-height: 1;
+
+                @media #{$md,$xs} {
+                    font-size: 14px;
+                    padding: 8px 12px;
+                }
+            }
+        }
+
+        .title {
+            font-size: 56px;
+            line-height: 1;
+            letter-spacing: -2%;
+            text-transform: uppercase;
+            color: #fff;
+            max-width: 734px;
+            margin-bottom: 30px;
+
+            @media #{$xxl,$xl} {
+                font-size: 46px;
+            }
+
+            @media #{$lg} {
+                font-size: 40px;
+            }
+
+            @media #{$md} {
+                font-size: 34px;
+            }
+
+            @media #{$xs} {
+                font-size: 26px;
+                margin-bottom: 20px;
+            }
+
+            a {
+                transition: .4s var(--lt-cube-1);
+
+                &:hover {
+                    color: var(--lt-clr-pr-1);
+                }
+            }
+        }
+
+        .dvr-line {
+            width: 100%;
+            height: 2px;
+            background-color: #fff;
+            opacity: .24;
+            margin-bottom: 30px;
+
+            @media #{$xs} {
+                margin-bottom: 20px;
+            }
+        }
+
+        .disc {
+            font-size: 18px;
+            color: #fff;
+            opacity: .8;
+            max-width: 734px;
+
+            @media #{$md,$xs} {
+                font-size: 16px;
+            }
+
+            span {
+                color: var(--lt-clr-pr-1);
+            }
+        }
+    }
+
+    /* the spinning "view all details" badge */
+    &-btn {
+        position: absolute;
+        right: 13.54%;
+        bottom: 10%;
+        width: 180px;
+        height: 180px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        @media #{$xxl,$xl} {
+            width: 150px;
+            height: 150px;
+        }
+
+        @media #{$lg,$md} {
+            width: 120px;
+            height: 120px;
+            right: 5%;
+        }
+
+        @media #{$xs} {
+            width: 92px;
+            height: 92px;
+            right: 20px;
+            bottom: auto;
+            top: 20px;
+        }
+
+        .circle-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .text-img {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 82.15%;
+            translate: -50% -50%;
+            animation: wa-rotated 14s linear infinite;
+        }
+
+        .icon {
+            position: relative;
+            width: 48.88%;
+            height: 48.88%;
+            border-radius: 50%;
+            background-color: #fff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: .5s var(--lt-cube-1);
+
+            img {
+                width: 45.45%;
+                rotate: -90deg;
+                transition: .5s var(--lt-cube-1);
+            }
+        }
+
+        &:hover {
+            .icon {
+                background-color: var(--lt-clr-h-1);
+
+                img {
+                    rotate: 0deg;
+                    filter: brightness(0) invert(1);
+                }
+            }
+        }
+    }
+}
+
+/* the pinned stack — one card per screen of scroll. Below 992px there is no
+   pin and no mask, so the cards simply follow each other down the page */
+.lt-projects-2 {
+    &-height {
+        height: 400vh;
+
+        @media #{$md,$xs} {
+            height: auto;
+        }
+    }
+
+    &-pin {
+        position: sticky;
+        top: 0;
+
+        @media #{$md,$xs} {
+            position: static;
+        }
+    }
+
+    &-wrap {
+        position: relative;
+        z-index: 1;
+        height: 100vh;
+
+        @media #{$md,$xs} {
+            height: auto;
+        }
+    }
+
+    &-card-posi {
+        position: absolute;
+        inset: 0;
+
+        @media #{$md,$xs} {
+            position: relative;
+            inset: auto;
+        }
+    }
+}
+/*
+    projects-2-end
+*/

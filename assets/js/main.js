@@ -547,6 +547,138 @@ if($(".lt-process-1-bg-img").length) {
 }
 
 
+// team-2-collage — the members start stacked in the middle and fan out to their
+// own spots when the collage scrolls in
+if($(".lt-team-2-wrap").length) {
+	var lt_team_wrap = document.querySelector(".lt-team-2-wrap");
+	var lt_team_members = gsap.utils.toArray(".lt-team-2-member");
+
+	// offsetLeft/Top stay put while the tween runs, unlike getBoundingClientRect
+	function lt_team_center_x(member) {
+		return (lt_team_wrap.offsetWidth / 2) - (member.offsetLeft + member.offsetWidth / 2);
+	}
+
+	function lt_team_center_y(member) {
+		return (lt_team_wrap.offsetHeight / 2) - (member.offsetTop + member.offsetHeight / 2);
+	}
+
+	// only where the scattered layout exists — keep in sync with scss/layout/_team.scss
+	gsap.matchMedia().add("(min-width: 1200px)", function () {
+		var lt_team_tl = gsap.timeline({
+			scrollTrigger: {
+				trigger: ".lt-team-2-wrap",
+				start: "top 50%",
+				invalidateOnRefresh: true,
+			}
+		});
+
+		lt_team_members.forEach(function (member, index) {
+			lt_team_tl.fromTo(member, {
+				x: function () {
+					return lt_team_center_x(member);
+				},
+				y: function () {
+					return lt_team_center_y(member);
+				},
+				scale: .4,
+				opacity: 0
+			}, {
+				x: 0,
+				y: 0,
+				scale: 1,
+				opacity: 1,
+				duration: 1.1,
+				ease: "power3.out"
+			}, index * .08);
+		});
+	});
+}
+
+
+// awards-2-left — the client mosaic builds itself up on scroll-in
+if($(".lt-awards-2-left").length) {
+	var lt_awards_tl = gsap.timeline({
+		scrollTrigger: {
+			trigger: ".lt-awards-2-left",
+			start: "top 80%",
+		}
+	});
+
+	lt_awards_tl
+		.from(".lt-awards-2-big-title", {
+			x: -60,
+			opacity: 0,
+			duration: 1,
+			ease: "power3.out"
+		})
+		.from(".lt-awards-2-logo .single-logo", {
+			scale: .6,
+			opacity: 0,
+			duration: .7,
+			stagger: {
+				each: .06,
+				from: "random"
+			},
+			ease: "power3.out"
+		}, "-=.7")
+		.from(".lt-awards-2-counter", {
+			scale: .8,
+			opacity: 0,
+			duration: .9,
+			ease: "back.out(1.6)"
+		}, "-=.45");
+}
+
+
+// projects-2-stack — each card opens up through the star mask while its photo
+// zooms out, one card per screen of pinned scroll
+if($(".lt-projects-2-height").length) {
+	var lt_projects2_cards = gsap.utils.toArray(".lt-projects-2-card");
+
+	// only where the section is pinned — keep in sync with scss/layout/_projects.scss
+	gsap.matchMedia().add("(min-width: 992px)", function () {
+		var lt_projects2_tl = gsap.timeline({
+			scrollTrigger: {
+				trigger: ".lt-projects-2-height",
+				start: "top 30%",
+				end: "bottom bottom",
+				scrub: 1,
+			}
+		});
+
+		lt_projects2_cards.forEach(function (card, index) {
+			var lt_projects2_img = card.querySelector(".img-elm img");
+			var lt_projects2_content = card.querySelectorAll(".tag-elm, .title, .dvr-line, .disc, .lt-projects-2-btn");
+
+			lt_projects2_tl
+				.fromTo(card, {
+					"--wa-mask": "0px"
+				}, {
+					"--wa-mask": "5000px",
+					ease: "none",
+					duration: 1
+				}, index)
+				.fromTo(lt_projects2_img, {
+					scale: 1.3
+				}, {
+					scale: 1,
+					ease: "none",
+					duration: 1
+				}, index)
+
+				// the copy rides in once the card is half open
+				.from(lt_projects2_content, {
+					y: 40,
+					opacity: 0,
+					duration: .5,
+					stagger: .08,
+					ease: "power3.out"
+				}, index + .3);
+		});
+	});
+}
+
+
 // blog-1-btn-wrap — the rails draw out and the dots ride in from both sides
 if($(".lt-blog-1-btn-wrap").length) {
 	var lt_blog_btn_lines = document.querySelectorAll(".lt-blog-1-btn-wrap .line");

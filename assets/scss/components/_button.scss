@@ -150,6 +150,14 @@
     i {
         font-size: 20px;
     }
+
+    &:is(.has-v2) {
+        background: var(--lt-clr-pr-1);
+    }
+
+    &:is(.has-v3) {
+        background: var(--lt-clr-sd-1);
+    }
 }
 
 .lt-pr-btn-3 {

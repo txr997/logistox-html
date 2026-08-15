@@ -53,6 +53,10 @@
     color: var(--lt-clr-sd-1);
     padding: 4px 10px;
     margin-bottom: 12px;
+
+    &:is(.has-v2) {
+        background-color: #fff;
+    }
 }
 
 .lt-sec-title-1 {

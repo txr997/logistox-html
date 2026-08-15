@@ -26,6 +26,8 @@ no restating what the user already saw.
 ## Markup / style conventions
 
 - Follow the existing naming and nesting conventions of the file being edited.
-- Write styles in the SCSS partials and compile with
-  `sass assets/scss/style.scss assets/css/style.css` — never hand-edit the compiled CSS.
+- Write styles in the SCSS partials only — never hand-edit the compiled CSS.
+- **Don't run the sass compiler.** A watcher already compiles
+  `assets/scss/main.scss` → `assets/css/main.css` automatically on save; running
+  `sass` manually is unnecessary work.
 - Match the surrounding comment density and indentation (tabs where the file uses tabs).
