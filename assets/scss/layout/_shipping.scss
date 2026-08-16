@@ -465,3 +465,97 @@
 /*
     shipping-1-end
 */
+
+/*
+    shipping-2-start
+*/
+.lt-shipping-2 {
+    &-bg-img {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        z-index: -1;
+        height: calc(100% - 180px);
+    }
+
+    &-marquee {
+        position: absolute;
+        top: 20px;
+        left: 0;
+        width: 100%;
+        z-index: -1;
+
+        @media #{$md,$xs} {
+            display: none;
+        }
+
+        &-wrap {
+            display: flex;
+            align-items: center;
+
+            .title {
+                display: flex;
+                align-items: center;
+                gap: 52px;
+                font-size: 192px;
+                font-weight: 500;
+                text-transform: uppercase;
+                line-height: 1;
+                color: rgb(0 56 101 / 20%);
+                flex: 0 0 auto;
+                margin-right: 50px;
+
+                @media #{$xxxl} {
+                    font-size: 180px;
+                }
+
+                @media #{$xxl} {
+                    font-size: 160px;
+                }
+
+                @media #{$xl} {
+                    font-size: 140px;
+                }
+
+                @media #{$lg} {
+                    font-size: 120px;
+                }
+
+                @media #{$md} {
+                    font-size: 100px;
+                }
+
+                @media #{$xs} {
+                    font-size: 60px;
+                }
+
+                @media #{$sm} {
+                    font-size: 80px;
+                }
+            }
+        }
+
+    }
+
+    &-area {
+        .lt-shipping-1 {
+            &-wrap {
+                display: flex;
+                gap: 65px;
+                justify-content: end;
+            }
+            &-form-elm {
+                .lt-pr-btn-2 {
+                    background: var(--lt-clr-pr-1);
+                }
+            }
+        }
+    }
+}
+
+
+
+/*
+    shipping-2-end
+*/

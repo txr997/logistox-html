@@ -134,7 +134,40 @@
     }
 }
 
+/* the road marking that starts running under the label */
+@keyframes lt-pr-btn-2-road {
+    to {
+        background-position-x: -18px;
+    }
+}
+
+/* the icon is dispatched out of the top-right and a new one arrives */
+@keyframes lt-pr-btn-2-icon {
+    0% {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+
+    45% {
+        transform: translate(140%, -140%);
+        opacity: 0;
+    }
+
+    55% {
+        transform: translate(-140%, 140%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+}
+
 .lt-pr-btn-2 {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
     font-family: var(--lt-font-1);
     font-weight: 700;
     font-size: 16px;
@@ -146,21 +179,84 @@
     gap: 8px;
     line-height: 1.5;
     padding: 16px 22px;
+    transition: .5s var(--lt-cube-1);
+
+    /* the gradient flips over on hover — a background can only be faded, not tweened */
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background: linear-gradient(90deg, #FFBD12 0%, #FF5900 34.62%, #F94627 100%);
+        opacity: 0;
+        transition: opacity .5s var(--lt-cube-1);
+    }
+
+    /* dashed road line along the bottom of the button */
+    &::after {
+        content: "";
+        position: absolute;
+        left: 14px;
+        right: 14px;
+        bottom: 8px;
+        height: 2px;
+        border-radius: 2px;
+        background-image: linear-gradient(90deg, rgb(255 255 255 / 65%) 0 10px, rgb(255 255 255 / 0%) 10px 18px);
+        background-size: 18px 2px;
+        background-repeat: repeat-x;
+        opacity: 0;
+        transition: opacity .4s var(--lt-cube-1);
+    }
 
     i {
         font-size: 20px;
+        display: inline-flex;
+    }
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 24px rgb(249 70 39 / 28%);
+        color: #fff;
+
+        &::before {
+            opacity: 1;
+        }
+
+        &::after {
+            opacity: 1;
+            animation: lt-pr-btn-2-road .6s linear infinite;
+        }
+
+        i {
+            animation: lt-pr-btn-2-icon .7s var(--lt-cube-1);
+        }
     }
 
     &:is(.has-v2) {
         background: var(--lt-clr-pr-1);
+
+        &::before {
+            background: var(--lt-clr-gd-1);
+        }
     }
 
     &:is(.has-v3) {
         background: var(--lt-clr-sd-1);
+
+        &::before {
+            background: var(--lt-clr-pr-1);
+        }
+
+        &:hover {
+            box-shadow: 0 10px 24px rgb(0 56 101 / 32%);
+        }
     }
 }
 
 .lt-pr-btn-3 {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
     background-color: var(--lt-clr-sd-1);
     font-family: var(--lt-font-1);
     color: #fff;
@@ -173,8 +269,23 @@
     padding: 8px;
     padding-left: 20px;
     gap: 12px;
+    transition: .5s var(--lt-cube-1);
+
+    /* the body colour swaps in — fading it avoids a stepped colour change */
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background-color: var(--lt-clr-pr-1);
+        opacity: 0;
+        transition: opacity .5s var(--lt-cube-1);
+    }
 
     .icon {
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
         width: 40px;
         height: 40px;
         display: flex;
@@ -183,6 +294,41 @@
         background-color: var(--lt-clr-pr-1);
         border-radius: 6px;
         font-size: 22px;
+
+        /* the icon box takes the body colour, so the two trade places */
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background-color: var(--lt-clr-sd-1);
+            opacity: 0;
+            transition: opacity .5s var(--lt-cube-1);
+        }
+
+        i {
+            display: inline-flex;
+        }
+    }
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 24px rgb(249 70 39 / 24%);
+        color: #fff;
+
+        &::before {
+            opacity: 1;
+        }
+
+        .icon {
+            &::before {
+                opacity: 1;
+            }
+
+            i {
+                animation: lt-pr-btn-2-icon .7s var(--lt-cube-1);
+            }
+        }
     }
 }
 

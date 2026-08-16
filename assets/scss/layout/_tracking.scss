@@ -147,10 +147,17 @@
                     box-shadow: 6px 6px 16px rgba(249, 70, 39, 0.4);
                 }
             }
+
+            &:hover {
+                .icon-elm {
+                    transform: rotate(-8deg) scale(1.08);
+                }
+            }
         }
         
     }
 }
+
 
 /* 
     tracking-2-end

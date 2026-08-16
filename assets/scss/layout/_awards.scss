@@ -1,6 +1,19 @@
 /*
     awards-2-start
 */
+
+/* the embossed word keeps breathing — both shadows grow and warm up */
+@keyframes lt-awards-2-glow {
+    0%,
+    100% {
+        text-shadow: 0 6px 7px rgb(142 142 142 / 14%), 0 -6px 7px rgb(142 142 142 / 30%);
+    }
+
+    50% {
+        text-shadow: 0 10px 18px rgb(249 70 39 / 26%), 0 -10px 18px rgb(250 193 46 / 42%);
+    }
+}
+
 .lt-awards-2 {
     &-area {
         background-color: var(--lt-clr-h-1);
@@ -37,6 +50,7 @@
         letter-spacing: -3%;
         color: var(--lt-clr-h-1);
         text-shadow: 0 6px 7px rgb(142 142 142 / 14%), 0 -6px 7px rgb(142 142 142 / 30%);
+        animation: lt-awards-2-glow 2s ease-in-out infinite;
         margin-bottom: 0;
 
         @media #{$xxl,$xl} {

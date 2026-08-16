@@ -258,7 +258,34 @@ if ($('.wa_backToTop').length) {
 
     $(scrollTopbtn).on('click', function (event) {
         event.preventDefault();
-        $('html, body').animate({ scrollTop: 0 }, duration, 'swing');
+
+        // css has `scroll-behavior: smooth`, which delays every scrollTop we set
+        // during the animation, so turn it off while we drive the scroll ourselves
+        var rootEl = document.documentElement;
+        var prevScrollBehavior = rootEl.style.scrollBehavior;
+        rootEl.style.scrollBehavior = 'auto';
+
+        $('html, body').stop(true);
+
+        var startY = window.pageYOffset || rootEl.scrollTop;
+        var startTime = null;
+
+        function waScrollStep(now) {
+            if (startTime === null) startTime = now;
+            var progress = Math.min((now - startTime) / duration, 1);
+            // easeOutCubic: moves immediately on click, then eases into the top
+            var eased = 1 - Math.pow(1 - progress, 3);
+
+            window.scrollTo(0, Math.round(startY * (1 - eased)));
+
+            if (progress < 1) {
+                requestAnimationFrame(waScrollStep);
+            } else {
+                rootEl.style.scrollBehavior = prevScrollBehavior;
+            }
+        }
+
+        requestAnimationFrame(waScrollStep);
     });
 }
 
