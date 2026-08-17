@@ -1517,6 +1517,20 @@ input:focus::placeholder, textarea:focus::placeholder {
   animation: lt-pr-btn-2-icon 0.7s var(--lt-cube-1);
 }
 
+.lt-pr-btn-4 {
+  font-family: var(--lt-font-1);
+  font-weight: 700;
+  font-size: 16px;
+  background-color: var(--lt-clr-pr-1);
+  color: #fff;
+  line-height: 1.5;
+  border-radius: 100px;
+  padding: 16px 28px;
+}
+.lt-pr-btn-4:is(.has-v2) {
+  background-color: var(--lt-clr-sd-1);
+}
+
 .lt-search-btn-1 {
   font-family: var(--lt-font-1);
   color: rgba(255, 255, 255, 0.4);
@@ -2213,29 +2227,56 @@ input:focus::placeholder, textarea:focus::placeholder {
 .wa_clip_anim {
   /* open left-to-right, one column after another */
 }
+.wa_clip_anim:is(.animated) {
+  /* the last column has nothing left to overlap */
+}
 .wa_clip_anim:is(.animated) .mask-1 {
   clip-path: inset(0 88.288% 0 0%);
+}
+.wa_clip_anim:is(.animated) {
+  /* the last column has nothing left to overlap */
 }
 .wa_clip_anim:is(.animated) .mask-2 {
   clip-path: inset(0 77.177% 0 11.111%);
 }
+.wa_clip_anim:is(.animated) {
+  /* the last column has nothing left to overlap */
+}
 .wa_clip_anim:is(.animated) .mask-3 {
   clip-path: inset(0 66.066% 0 22.222%);
+}
+.wa_clip_anim:is(.animated) {
+  /* the last column has nothing left to overlap */
 }
 .wa_clip_anim:is(.animated) .mask-4 {
   clip-path: inset(0 54.955% 0 33.333%);
 }
+.wa_clip_anim:is(.animated) {
+  /* the last column has nothing left to overlap */
+}
 .wa_clip_anim:is(.animated) .mask-5 {
   clip-path: inset(0 43.844% 0 44.444%);
+}
+.wa_clip_anim:is(.animated) {
+  /* the last column has nothing left to overlap */
 }
 .wa_clip_anim:is(.animated) .mask-6 {
   clip-path: inset(0 32.733% 0 55.555%);
 }
+.wa_clip_anim:is(.animated) {
+  /* the last column has nothing left to overlap */
+}
 .wa_clip_anim:is(.animated) .mask-7 {
   clip-path: inset(0 21.622% 0 66.666%);
 }
+.wa_clip_anim:is(.animated) {
+  /* the last column has nothing left to overlap */
+}
 .wa_clip_anim:is(.animated) .mask-8 {
   clip-path: inset(0 10.511% 0 77.777%);
+}
+.wa_clip_anim:is(.animated) {
+  /* the last column has nothing left to overlap */
 }
 .wa_clip_anim:is(.animated) .mask-9 {
   clip-path: inset(0 0% 0 88.888%);
@@ -2291,6 +2332,10 @@ input:focus::placeholder, textarea:focus::placeholder {
   flex-grow: 1;
   background: rgba(0, 166, 80, 0.5);
   mix-blend-mode: luminosity;
+}
+
+.lt-gray-bg {
+  background-color: #F3F3F6;
 }
 
 /* 
@@ -2703,6 +2748,103 @@ input:focus::placeholder, textarea:focus::placeholder {
 
 /* 
     header-2-end
+*/
+/* 
+    header-3-start
+*/
+.lt-header-3-area {
+  position: absolute;
+  left: 0;
+  top: 24px;
+  width: 100%;
+  z-index: 3;
+}
+.lt-header-3-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+  border-radius: 100px;
+  background-color: #F3F3F6;
+  position: relative;
+  padding: 0 10px;
+}
+.lt-header-3-wrap::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 6px;
+  left: 0;
+  background: rgba(10, 31, 67, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.48);
+  backdrop-filter: blur(6px);
+  border-radius: 70px;
+  z-index: -1;
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), (max-width: 767px) {
+  .lt-header-3-wrap {
+    padding: 10px;
+  }
+}
+.lt-header-3-action-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 24px;
+}
+.lt-header-3-action-link .lt-offcanvas-btn-1 {
+  color: #000;
+}
+@media (min-width: 1800px), only screen and (min-width: 1600px) and (max-width: 1799px), only screen and (min-width: 1400px) and (max-width: 1599px), only screen and (min-width: 1200px) and (max-width: 1399px) {
+  .lt-header-3-action-link .lt-offcanvas-btn-1 {
+    display: none;
+  }
+}
+.lt-header-3-action-link .lt-offcanvas-btn-1:hover {
+  color: var(--lt-clr-pr-1);
+}
+.lt-header-3-action-link .lt-pr-btn-4 {
+  background-color: #FAC12E;
+  color: #000;
+  padding: 12px 21px;
+}
+@media (max-width: 767px) {
+  .lt-header-3-action-link .lt-pr-btn-4 {
+    display: none;
+  }
+}
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+  .lt-header-3-action-link .lt-pr-btn-4 {
+    display: inline-flex;
+  }
+}
+.lt-header-3-action-link .lt-search-btn-1 {
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: 500;
+}
+.lt-header-3-action-link .lt-search-btn-1 i {
+  color: #000;
+}
+@media (max-width: 767px) {
+  .lt-header-3-action-link .lt-search-btn-1 {
+    display: none;
+  }
+}
+.lt-header-3-menu .lt-main-navigation .navbar-nav {
+  gap: 40px;
+}
+.lt-header-3-menu .lt-main-navigation .navbar-nav li a {
+  color: #000;
+}
+.lt-header-3-menu .lt-main-navigation .navbar-nav li a::before {
+  color: var(--lt-clr-pr-1);
+}
+.lt-header-3-menu .lt-main-navigation .navbar-nav li .dropdown-menu {
+  background: #F3F3F6;
+}
+
+/* 
+    header-3-end
 */
 /* 
     sticky-header-css-start
@@ -4302,6 +4444,9 @@ input:focus::placeholder, textarea:focus::placeholder {
 .lt-industries-1-card:hover .back-content {
   opacity: 1;
 }
+.lt-industries-1-card:is(.has-bg-clr) {
+  background-color: #F3F3F6;
+}
 
 /* 
     industries-1-end
@@ -4876,6 +5021,7 @@ input:focus::placeholder, textarea:focus::placeholder {
   font-size: 26px;
   color: #fff;
   margin-bottom: 22px;
+  transition: 0.5s var(--lt-cube-1);
 }
 .lt-tracking-2-card-single .title {
   font-size: 20px;
@@ -4894,6 +5040,9 @@ input:focus::placeholder, textarea:focus::placeholder {
 .lt-tracking-2-card-single:nth-child(3) .icon-elm {
   background-color: var(--lt-clr-pr-1);
   box-shadow: 6px 6px 16px rgba(249, 70, 39, 0.4);
+}
+.lt-tracking-2-card-single:hover .icon-elm {
+  transform: rotate(-8deg) scale(1.08);
 }
 
 /* 
@@ -7322,7 +7471,7 @@ input:focus::placeholder, textarea:focus::placeholder {
   letter-spacing: -3%;
   color: var(--lt-clr-h-1);
   text-shadow: 0 6px 7px rgba(142, 142, 142, 0.14), 0 -6px 7px rgba(142, 142, 142, 0.3);
-  animation: lt-awards-2-glow 4s ease-in-out infinite;
+  animation: lt-awards-2-glow 2s ease-in-out infinite;
   margin-bottom: 0;
 }
 @media only screen and (min-width: 1400px) and (max-width: 1599px), only screen and (min-width: 1200px) and (max-width: 1399px) {

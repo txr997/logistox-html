@@ -218,6 +218,10 @@
                 opacity: 1;
             }
         }
+
+        &:is(.has-bg-clr) {
+            background-color: #F3F3F6;
+        }
     }
     
 

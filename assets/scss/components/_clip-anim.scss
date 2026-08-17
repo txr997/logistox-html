@@ -36,7 +36,12 @@ $wa-clip-anim-overlap: 0.6%;
     &:is(.animated) {
         @for $i from 1 through $wa-clip-anim-mask {
             $left: ($i - 1) * $wa-clip-anim-step;
-            $right: if($i == $wa-clip-anim-mask, 0%, ($wa-clip-anim-mask - $i) * $wa-clip-anim-step - $wa-clip-anim-overlap);
+            $right: ($wa-clip-anim-mask - $i) * $wa-clip-anim-step - $wa-clip-anim-overlap;
+
+            /* the last column has nothing left to overlap */
+            @if $i == $wa-clip-anim-mask {
+                $right: 0%;
+            }
 
             .mask-#{$i} {
                 clip-path: inset(0 $right 0 $left);
