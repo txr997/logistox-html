@@ -473,6 +473,10 @@
             @media #{$sm} {
                 display: inline-flex;
             }
+
+            &:hover {
+                color: #fff;
+            }
         }
 
         .lt-search-btn-1 {

@@ -185,7 +185,82 @@ function afterPreloader() {
 				}, "-=.7");
 		}
 
-				
+
+		// hero-2-intro — the artwork settles in as the preloader clears
+		if($(".lt-hero-2-img-box").length) {
+			var lt_hero2_tl = gsap.timeline({ delay: .2 });
+
+			lt_hero2_tl
+				.from(".lt-hero-2-img-bg img", {
+					scale: 1.35,
+					duration: 1.8,
+					ease: "power3.out"
+				})
+				.from(".lt-hero-2-img-main img", {
+					yPercent: 100,
+					duration: 1.4,
+					ease: "power3.out"
+				}, "-=1.35");
+		}
+
+
+		// hero-3-intro — the hero settles in as the preloader clears
+		if($(".lt-hero-3-area").length) {
+			var lt_hero3_tl = gsap.timeline({ delay: .2 });
+
+			lt_hero3_tl
+				.from(".lt-hero-3-rating", {
+					y: 24,
+					opacity: 0,
+					duration: .8,
+					ease: "power3.out"
+				})
+				.from(".lt-hero-3-disc", {
+					y: 24,
+					opacity: 0,
+					duration: .8,
+					ease: "power3.out"
+				}, "-=.6")
+				.from(".lt-hero-3-form", {
+					x: 60,
+					opacity: 0,
+					duration: 1,
+					ease: "power3.out"
+				}, "-=.85")
+
+				// the glass cards fan out from behind the form
+				.from(".lt-hero-3-form-box .ghost-card", {
+					x: -24,
+					y: -24,
+					opacity: 0,
+					duration: .8,
+					stagger: .12,
+					ease: "power3.out"
+				}, "-=.55")
+				.from(".lt-hero-3-line", {
+					scaleX: 0,
+					transformOrigin: "left center",
+					duration: 1.1,
+					ease: "power3.out"
+				}, "<")
+				.from(".lt-hero-3-bottom .btn-elm ", {
+					y: 24,
+					opacity: 0,
+					duration: .7,
+					stagger: .12,
+					ease: "power3.out",
+
+					// hand the transform back to css so the hover lift keeps working
+					clearProps: "transform"
+				}, "-=.5")
+				.from(".lt-hero-3-partner", {
+					opacity: 0,
+					duration: .9,
+					ease: "power2.out"
+				}, "-=.5");
+		}
+
+
 		// footer-big-title — the letters keep driving in and out like a convoy
 		function waFooterTitleAnim() {
 			gsap.registerPlugin(SplitText);
@@ -592,6 +667,121 @@ if($(".lt-team-2-wrap").length) {
 			}, index * .08);
 		});
 	});
+}
+
+
+// services-2-ani-img — the collage assembles when the section scrolls in
+if($(".lt-services-2-ani-img").length) {
+	var lt_services2_ani_tl = gsap.timeline({
+		scrollTrigger: {
+			trigger: ".lt-services-2-ani-img",
+			start: "top 85%",
+		}
+	});
+
+	lt_services2_ani_tl
+
+		// the orange plate drops in from above the frame
+		.from(".lt-services-2-ani-img .bg-img", {
+			yPercent: -100,
+			duration: 1.2,
+			ease: "power3.out"
+		})
+
+		// the cutout comes out of the left edge, small at first
+		.from(".lt-services-2-ani-img .main-img img", {
+			xPercent: -60,
+			scale: .4,
+			opacity: 0,
+			transformOrigin: "left center",
+			duration: 1.3,
+			ease: "power3.out"
+		}, "-=.3");
+}
+
+// faqs-2-shapes — the side shapes slide in from their own edge
+if($(".lt-faqs-2-bg-shape-1, .lt-faqs-2-bg-shape-2").length) {
+	var lt_faqs_shape_tl = gsap.timeline({
+		scrollTrigger: {
+			trigger: ".lt-faqs-2-area",
+			start: "top 50%",
+		}
+	});
+
+	lt_faqs_shape_tl
+
+		// inside shape-1 the panel and the ribbons come from opposite sides
+		.from(".lt-faqs-2-bg-shape-1 .elm-1", {
+			xPercent: -60,
+			opacity: 0,
+			duration: .8,
+			ease: "power3.out"
+		},)
+		.from(".lt-faqs-2-bg-shape-2 .elm-1", {
+			xPercent: 60,
+			opacity: 0,
+			duration: .8,
+			ease: "power3.out"
+		},"<")
+		.from(".lt-faqs-2-bg-shape-1 .elm-2", {
+			xPercent: -60,
+			opacity: 0,
+			duration: .8,
+			ease: "power3.out"
+		},"<30%")
+		.from(".lt-faqs-2-bg-shape-2 .elm-2", {
+			xPercent: 60,
+			opacity: 0,
+			duration: .8,
+			ease: "power3.out"
+		},"<")
+		.from(".lt-faqs-2-bg-shape-1 .elm-3", {
+			xPercent: -60,
+			opacity: 0,
+			duration: .8,
+			ease: "power3.out"
+		},"<30%")
+		.from(".lt-faqs-2-bg-shape-2 .elm-3", {
+			xPercent: 60,
+			opacity: 0,
+			duration: .8,
+			ease: "power3.out"
+		},"<")
+
+}
+
+
+// achieve-2-img — the photo cluster drops into place on scroll-in
+if($(".lt-achieve-2-img").length) {
+	var lt_achieve_tl = gsap.timeline({
+		scrollTrigger: {
+			trigger: ".lt-achieve-2-img",
+			start: "top 80%",
+		}
+	});
+
+	lt_achieve_tl
+		.from(".lt-achieve-2-img .has-pos-1", {
+			x: -60,
+			scale: .9,
+			opacity: 0,
+			duration: 1,
+			ease: "power3.out"
+		})
+		.from(".lt-achieve-2-img .has-pos-2", {
+			y: -60,
+			scale: .9,
+			opacity: 0,
+			duration: 1,
+			ease: "power3.out"
+		}, "-=.75")
+		.from(".lt-achieve-2-img .has-pos-3", {
+			y: 60,
+			scale: .9,
+			opacity: 0,
+			duration: 1,
+			ease: "power3.out"
+		}, "-=.75");
 }
 
 

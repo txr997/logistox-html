@@ -333,6 +333,9 @@
 }
 
 .lt-pr-btn-4 {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
     font-family: var(--lt-font-1);
     font-weight: 700;
     font-size: 16px;
@@ -341,9 +344,46 @@
     line-height: 1.5;
     border-radius: 100px;
     padding: 16px 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: .5s var(--lt-cube-1);
+
+    /* the fill grows out of the middle of the pill */
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        border-radius: 100px;
+        background-color: var(--lt-clr-sd-1);
+        transform: scaleX(0);
+        transform-origin: center;
+        transition: transform .5s var(--lt-cube-1);
+    }
+
+    .text {
+        transition: .5s var(--lt-cube-1);
+    }
+
+    &:hover {
+        color: #fff;
+
+        &::before {
+            transform: scaleX(1);
+        }
+    }
 
     &:is(.has-v2) {
         background-color: var(--lt-clr-sd-1);
+
+        &::before {
+            background-color: var(--lt-clr-pr-1);
+        }
+
+        &:hover {
+            box-shadow: 0 10px 24px rgb(0 56 101 / 32%);
+        }
     }
 }
 

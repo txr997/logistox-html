@@ -1,0 +1,293 @@
+/*
+    global-3-start
+*/
+.lt-global-3 {
+    &-area {
+        background-color: var(--lt-clr-sd-1);
+        padding-top: 128px;
+        padding-bottom: 128px;
+
+        @media #{$lg} {
+            padding-top: 100px;
+            padding-bottom: 100px;
+        }
+
+        @media #{$md,$xs} {
+            padding-top: 90px;
+            padding-bottom: 90px;
+        }
+    }
+
+    /* the faint dotted world behind the headline */
+    &-dot {
+        position: absolute;
+        left: 3.33%;
+        top: 180px;
+        width: 93.33%;
+        height: 649px;
+        background-image: radial-gradient(rgb(255 255 255 / 12%) 1.8px, rgb(255 255 255 / 0%) 1.8px);
+        background-size: 10.6px 10.4px;
+        -webkit-mask-image: radial-gradient(60% 60% at 50% 45%, #000000 0%, rgb(0 0 0 / 0%) 100%);
+        mask-image: radial-gradient(60% 60% at 50% 45%, #000000 0%, rgb(0 0 0 / 0%) 100%);
+        pointer-events: none;
+
+        @media #{$md,$xs} {
+            display: none;
+        }
+    }
+
+    /* the port photo sinking into the blue floor */
+    &-bg-img {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        opacity: .28;
+        mix-blend-mode: luminosity;
+        pointer-events: none;
+        -webkit-mask-image: linear-gradient(180deg, rgb(0 0 0 / 0%) 0%, #000000 45%);
+        mask-image: linear-gradient(180deg, rgb(0 0 0 / 0%) 0%, #000000 45%);
+
+        img {
+            width: 100%;
+        }
+    }
+
+    &-globe {
+        position: absolute;
+        left: 50%;
+        top: 264px;
+        width: 24.58%;
+        translate: -50% 0;
+        pointer-events: none;
+
+        @media #{$xxl,$xl} {
+            top: 230px;
+        }
+
+        @media #{$lg,$md,$xs} {
+            display: none;
+        }
+
+        img {
+            width: 100%;
+            animation: wa-rotated 40s linear infinite;
+        }
+    }
+
+    &-sec-title {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        margin-bottom: 218px;
+
+        @media #{$xxl,$xl} {
+            margin-bottom: 130px;
+        }
+
+        @media #{$lg,$md,$xs} {
+            margin-bottom: 60px;
+        }
+
+        .subtitle {
+            font-family: var(--lt-font-1);
+            font-size: 20px;
+            color: #FAC12E;
+            margin-bottom: 20px;
+
+            @media #{$md,$xs} {
+                font-size: 16px;
+            }
+        }
+
+        .title {
+            position: relative;
+            display: inline-block;
+            font-size: 150px;
+            line-height: .9;
+            letter-spacing: -3%;
+            color: #fff;
+            margin-bottom: 0;
+
+            @media #{$xxl,$xl} {
+                font-size: 120px;
+            }
+
+            @media #{$lg} {
+                font-size: 96px;
+            }
+
+            @media #{$md} {
+                font-size: 74px;
+            }
+
+            @media #{$xs} {
+                font-size: 52px;
+            }
+
+            /* the badge leans on the bottom-right of the number */
+            .tag {
+                position: absolute;
+                right: 0;
+                bottom: -18px;
+                font-family: var(--lt-font-1);
+                font-size: 20px;
+                font-weight: 400;
+                line-height: 1;
+                color: #fff;
+                background: var(--lt-clr-gd-1);
+                border-radius: 4px;
+                padding: 11px 14px;
+
+                @media #{$md,$xs} {
+                    font-size: 15px;
+                    padding: 8px 12px;
+                }
+
+                @media #{$xs} {
+                    position: static;
+                    display: inline-block;
+                    margin-top: 12px;
+                }
+            }
+        }
+    }
+
+    &-wrap {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+
+        @media #{$lg,$md} {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        @media #{$xs} {
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        > * {
+            min-width: 0;
+        }
+    }
+
+    &-card {
+        position: relative;
+        min-height: 384px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 30px;
+        padding: 52px 36px 40px;
+        background-color: var(--lt-clr-sd-1);
+        border: 1px solid rgb(255 255 255 / 14%);
+        border-radius: 0;
+
+        @media #{$xxl,$xl,$lg} {
+            padding: 40px 28px;
+        }
+
+        @media #{$md,$xs} {
+            min-height: auto;
+            padding: 32px 24px;
+        }
+
+        /* only the outer edges of the row are rounded */
+        &:first-child {
+            border-radius: 16px 0 0 16px;
+        }
+
+        &:last-child {
+            border-radius: 0 16px 16px 0;
+        }
+
+        @media #{$lg,$md,$xs} {
+            &:first-child,
+            &:last-child {
+                border-radius: 16px;
+            }
+        }
+
+        /* the globe bites a circle out of the two middle cards */
+        &:is(.has-cut) {
+            justify-content: flex-end;
+            background-color: #296696;
+            border: 0;
+
+            @media #{$over,$xxxl,$xxl,$xl} {
+                -webkit-mask-repeat: no-repeat;
+                mask-repeat: no-repeat;
+            }
+        }
+
+        &:is(.has-cut-1) {
+            @media #{$over,$xxxl,$xxl,$xl} {
+                -webkit-mask-image: radial-gradient(circle 14.2vw at 102% -10%, rgb(0 0 0 / 0%) 99.6%, #000000 100%);
+                mask-image: radial-gradient(circle 14.2vw at 102% -10%, rgb(0 0 0 / 0%) 99.6%, #000000 100%);
+            }
+        }
+
+        &:is(.has-cut-2) {
+            @media #{$over,$xxxl,$xxl,$xl} {
+                -webkit-mask-image: radial-gradient(circle 14.2vw at -2% -10%, rgb(0 0 0 / 0%) 99.6%, #000000 100%);
+                mask-image: radial-gradient(circle 14.2vw at -2% -10%, rgb(0 0 0 / 0%) 99.6%, #000000 100%);
+            }
+        }
+
+        .number {
+            display: inline-flex;
+            align-items: center;
+            font-size: 56px;
+            line-height: 1;
+            letter-spacing: -3%;
+            color: #fff;
+            margin-bottom: 0;
+
+            @media #{$xxl,$xl,$lg} {
+                font-size: 46px;
+            }
+
+            @media #{$md,$xs} {
+                font-size: 40px;
+            }
+
+            .suffix {
+                font-size: 30px;
+                color: #FAC12E;
+                margin-left: 2px;
+                margin-top: 17px;
+
+                @media #{$xxl,$xl,$lg,$md,$xs} {
+                    font-size: 24px;
+                }
+            }
+        }
+
+        .content-wrap {
+            .number {
+                margin-bottom: 24px;
+            }
+        }
+
+        .title {
+            font-size: 20px;
+            font-weight: 500;
+            color: #fff;
+            margin-bottom: 0;
+        }
+
+        .disc {
+            font-size: 16px;
+            color: #fff;
+            opacity: .72;
+            margin-top: 12px;
+        }
+    }
+}
+/*
+    global-3-end
+*/

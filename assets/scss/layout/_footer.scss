@@ -57,7 +57,8 @@
         }
 
         &:is(.has-link),
-        &:is(.has-subscribe) {
+        &:is(.has-subscribe),
+        &:is(.has-contact) {
             border-left: 1px solid rgb(255 255 255 / 20%);
             padding-left: 105px;
 
@@ -77,6 +78,43 @@
                 border-left: none;
                 padding-left: 0;
                 padding-top: 45px;
+            }
+        }
+
+        /* the get-in-touch column used on home-3 */
+        &:is(.has-contact) {
+            .contact-elm {
+                display: flex;
+                flex-direction: column;
+                gap: 24px;
+
+                li {
+                    display: flex;
+                    align-items: flex-start;
+                    gap: 16px;
+                }
+
+                .icon {
+                    font-size: 16px;
+                    line-height: 28px;
+                    color: var(--lt-clr-pr-1);
+                    flex: 0 0 auto;
+                }
+
+                .text {
+                    font-size: 18px;
+                    line-height: 1.5555;
+                    color: #fff;
+                    transition: .4s var(--lt-cube-1);
+
+                    @media #{$md,$xs} {
+                        font-size: 16px;
+                    }
+                }
+
+                a.text:hover {
+                    color: var(--lt-clr-pr-1);
+                }
             }
         }
 
@@ -427,7 +465,7 @@
     &-area {
         background-color: #04132F;
         padding-top: 128px;
-
+        margin-top: -1px;
         @media #{$md,$xs} {
             padding-top: 90px;
         }
@@ -705,6 +743,7 @@
             margin: 0 16px;
         }
 
+        /* the corner blocks spread out from the middle once the bar is in view */
         &::before,
         &::after {
             content: "";
@@ -713,14 +752,26 @@
             right: -24px;
             height: 24px;
             background-image: linear-gradient(90deg, #FFD25D 0 24px, rgb(255 210 93 / 0%) 24px calc(100% - 24px), #FFD25D calc(100% - 24px) 100%);
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 1s var(--lt-cube-1);
         }
 
         &::before {
             top: -24px;
+            transition-delay: .15s;
         }
 
         &::after {
             bottom: -24px;
+            transition-delay: .3s;
+        }
+
+        &:is(.active) {
+            &::before,
+            &::after {
+                transform: scaleX(1);
+            }
         }
 
         .single-contact {
@@ -778,6 +829,10 @@
                     height: 66px;
                     font-size: 32px;
                 }
+
+                img {
+                    transition: .5s var(--lt-cube-1);
+                }
             }
 
             .disc {
@@ -804,6 +859,15 @@
                     span {
                         color: var(--lt-clr-pr-1);
                     }
+                }
+            }
+
+            &:hover {
+                .icon {
+                    img {
+                        transform: rotate(-8deg) scale(1.08);
+                    }
+                    
                 }
             }
         }

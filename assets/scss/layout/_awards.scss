@@ -290,6 +290,8 @@
         border: 1px solid rgb(255 255 255 / 24%);
         border-radius: 16px;
         transition: .5s var(--lt-cube-1);
+        position: relative;
+        
 
         @media #{$xl} {
             height: 72px;
@@ -400,7 +402,7 @@
         &:is(.active),
         &:hover {
             background-color: #35486B;
-
+            z-index: 3;
             .glow-elm {
                 opacity: 1;
             }
