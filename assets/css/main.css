@@ -8251,6 +8251,178 @@ input:focus::placeholder, textarea:focus::placeholder {
     global-3-end
 */
 /*
+    cta-3-start
+*/
+.lt-cta-3-area {
+  background-color: var(--lt-clr-pr-1);
+  min-height: 140px;
+  display: flex;
+  align-items: center;
+  padding: 20px 0;
+  margin-bottom: 8px;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px), (max-width: 767px) {
+  .lt-cta-3-area {
+    padding: 40px 0;
+  }
+}
+.lt-cta-3 {
+  /* the freight photo washed into the orange */
+}
+.lt-cta-3-bg-img {
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: luminosity;
+  pointer-events: none;
+}
+.lt-cta-3-bg-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.lt-cta-3-plane {
+  position: absolute;
+  right: 5.78%;
+  top: 5px;
+  width: 18.02%;
+  mix-blend-mode: luminosity;
+  pointer-events: none;
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .lt-cta-3-plane {
+    right: 2%;
+    opacity: 0.8;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px), (max-width: 767px) {
+  .lt-cta-3-plane {
+    display: none;
+  }
+}
+.lt-cta-3-plane img {
+  width: 100%;
+}
+.lt-cta-3-wrap {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+@media only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px) {
+  .lt-cta-3-wrap {
+    gap: 30px;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px), (max-width: 767px) {
+  .lt-cta-3-wrap {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+}
+.lt-cta-3-title {
+  font-size: 32px;
+  line-height: 1.125;
+  letter-spacing: -2%;
+  color: #fff;
+  max-width: 520px;
+  margin-bottom: 0;
+}
+@media only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px) {
+  .lt-cta-3-title {
+    font-size: 26px;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px), (max-width: 767px) {
+  .lt-cta-3-title {
+    font-size: 24px;
+  }
+}
+.lt-cta-3-title span {
+  color: #1A2D4E;
+}
+.lt-cta-3-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+  margin-right: 22.5%;
+}
+@media only screen and (min-width: 1400px) and (max-width: 1599px), only screen and (min-width: 1200px) and (max-width: 1399px) {
+  .lt-cta-3-form {
+    margin-right: 16%;
+  }
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .lt-cta-3-form {
+    margin-right: 10%;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px), (max-width: 767px) {
+  .lt-cta-3-form {
+    margin-right: 0;
+    width: 100%;
+  }
+}
+.lt-cta-3-form .form-input {
+  width: 380px;
+  height: 56px;
+  background: transparent;
+  border: 2px solid #fff;
+  border-radius: 12px;
+  padding: 0 20px;
+  font-family: var(--lt-font-2);
+  font-size: 18px;
+  font-weight: 400;
+  color: #fff;
+}
+@media only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px) {
+  .lt-cta-3-form .form-input {
+    width: 300px;
+    font-size: 16px;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px), (max-width: 767px) {
+  .lt-cta-3-form .form-input {
+    width: 100%;
+    font-size: 16px;
+  }
+}
+.lt-cta-3-form .form-input::placeholder {
+  color: #fff;
+  opacity: 0.9;
+}
+.lt-cta-3-form .form-btn {
+  width: 56px;
+  height: 56px;
+  flex: 0 0 auto;
+  border-radius: 12px;
+  background-color: #fff;
+  color: var(--lt-clr-pr-1);
+  font-size: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.5s var(--lt-cube-1);
+}
+@media only screen and (min-width: 768px) and (max-width: 991px), (max-width: 767px) {
+  .lt-cta-3-form .form-btn {
+    width: 52px;
+    height: 52px;
+    font-size: 20px;
+  }
+}
+.lt-cta-3-form .form-btn:hover {
+  background-color: var(--lt-clr-h-1);
+  color: #fff;
+}
+
+/*
+    cta-3-end
+*/
+/*
     awards-2-start
 */
 /* the embossed word keeps breathing — both shadows grow and warm up */

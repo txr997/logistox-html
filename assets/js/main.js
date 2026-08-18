@@ -699,6 +699,22 @@ if($(".lt-services-2-ani-img").length) {
 		}, "-=.3");
 }
 
+// cta-3-plane — the plane comes down from the top right and lands
+if($(".lt-cta-3-plane").length) {
+	gsap.from(".lt-cta-3-plane", {
+		scrollTrigger: {
+			trigger: ".lt-cta-3-area",
+			start: "top 90%",
+		},
+		xPercent: 80,
+		yPercent: -170,
+		rotation: 14,
+		opacity: 0,
+		duration: 1.6,
+		ease: "power3.out"
+	});
+}
+
 // faqs-2-shapes — the side shapes slide in from their own edge
 if($(".lt-faqs-2-bg-shape-1, .lt-faqs-2-bg-shape-2").length) {
 	var lt_faqs_shape_tl = gsap.timeline({
