@@ -193,6 +193,8 @@
     }
 
     &-action-link {
+        position: relative;
+        z-index: 1;
         display: inline-flex;
         align-items: center;
         gap: 28px;
@@ -369,6 +371,13 @@
         justify-content: space-between;
     }
 
+    
+    &-right {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
     &-action-link {
         border-radius: 10px;
         background: var(--lt-clr-sd-1);
@@ -376,10 +385,12 @@
         display: flex;
         align-items: center;
         gap: 6px;
+        position: relative;
+        z-index: 2;
 
         .lt-pr-btn-2 {
             background: #FFBD12;
-            color: #000;
+            color: #0A1F43;
             padding: 12px 21px;
             @media #{$xs} {
                 display: none;
@@ -396,6 +407,109 @@
         .lt-search-btn-2 {
             @media #{$xs} {
                 display: none;
+            }
+        }
+    }
+
+    &-menu {
+        background-color: #fff;
+        border-radius: 10px 0 0 10px;
+        padding-left: 24px;
+        padding-right: 32px;
+        margin-right: -8px;
+
+        /* the white plate opens out of the action bar when the offcanvas
+           button is hovered — nothing ever shows past the right group */
+        @media #{$over,$xxxl,$xxl,$xl} {
+            position: absolute;
+            right: 100%;
+            top: 50%;
+            margin-right: -8px;
+            z-index: 0;
+            translate: 0 -50%;
+            background-color: transparent;
+            pointer-events: none;
+
+            &::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                z-index: -1;
+                background-color: #fff;
+                border-radius: 10px 0 0 10px;
+                transform: scaleX(0);
+                transform-origin: right center;
+                transition: transform .6s var(--lt-cube-1);
+            }
+
+            /* out of flow it would otherwise shrink and wrap the links */
+            .lt-main-navigation {
+                opacity: 0;
+                transition: opacity .4s var(--lt-cube-1);
+
+                .navbar-nav {
+                    flex-wrap: nowrap;
+                    white-space: nowrap;
+                }
+            }
+
+            .lt-header-2-right:is(.menu-open) & {
+                pointer-events: auto;
+
+                &::before {
+                    transform: scaleX(1);
+                }
+
+                .lt-main-navigation {
+                    opacity: 1;
+                    transition-delay: .15s;
+                }
+            }
+        }
+
+        .lt-main-navigation {
+            .navbar-nav {
+                gap: 48px;
+
+                li {
+                    a {
+                        color: #000;
+                        padding: 18px 0px;
+
+                        &::after {
+                            content: "";
+                            height: 100%;
+                            width: 100%;
+                            background: linear-gradient(rgba(249, 70, 39, 1) 0%, rgba(10, 31, 67, 0) 30%, rgba(10, 31, 67, 0) 70%, rgba(249, 70, 39, 1) 100%);
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            z-index: -1;
+                            opacity: 0;
+                            transition: .5s var(--lt-cube-1);
+                        }
+                    }
+
+                    &:is(.dropdown) {
+                        > a {
+                            padding-right: 15px;
+                        }
+                    }
+
+
+                    &:hover {
+                        > a {
+                            &::after {
+                                opacity: .2;
+                            }
+                        }
+                    }
+
+
+                    .dropdown-menu {
+                        background-color: #fff;
+                    }
+                }
             }
         }
     }
@@ -445,6 +559,7 @@
             padding: 10px;
         }
     }
+
 
     &-action-link {
         display: inline-flex;

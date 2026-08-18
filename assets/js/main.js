@@ -188,7 +188,11 @@ function afterPreloader() {
 
 		// hero-2-intro — the artwork settles in as the preloader clears
 		if($(".lt-hero-2-img-box").length) {
+			var lt_hero2_imgs = gsap.utils.toArray(".lt-hero-2-img-main img");
 			var lt_hero2_tl = gsap.timeline({ delay: .2 });
+
+			// every visual waits below the frame, the first one rides up
+			gsap.set(lt_hero2_imgs, { yPercent: 100 });
 
 			lt_hero2_tl
 				.from(".lt-hero-2-img-bg img", {
@@ -196,11 +200,37 @@ function afterPreloader() {
 					duration: 1.8,
 					ease: "power3.out"
 				})
-				.from(".lt-hero-2-img-main img", {
-					yPercent: 100,
+				.to(lt_hero2_imgs[0], {
+					yPercent: 0,
 					duration: 1.4,
 					ease: "power3.out"
 				}, "-=1.35");
+
+			// then they keep taking turns: one drops away as the next rides up
+			if (lt_hero2_imgs.length > 1) {
+				var lt_hero2_loop = gsap.timeline({ repeat: -1 });
+
+				lt_hero2_imgs.forEach(function (img, index) {
+					var lt_hero2_next = lt_hero2_imgs[(index + 1) % lt_hero2_imgs.length];
+
+					lt_hero2_loop
+						.to({}, { duration: 2 })
+						.to(img, {
+							yPercent: 100,
+							duration: .9,
+							ease: "power3.in"
+						})
+						.fromTo(lt_hero2_next, {
+							yPercent: 100
+						}, {
+							yPercent: 0,
+							duration: .9,
+							ease: "power3.out"
+						});
+				});
+
+				lt_hero2_tl.add(lt_hero2_loop);
+			}
 		}
 
 
@@ -427,6 +457,24 @@ function afterPageLoad() {
 	after-page-load-start
 */
 }
+
+// header-2-menu — the offcanvas button slides the menu out, and it stays open
+// until the pointer leaves the whole right-hand group
+if ($(".lt-header-2-right").length) {
+	var lt_header2_right = document.querySelector(".lt-header-2-right");
+	var lt_header2_btn = lt_header2_right.querySelector(".lt-offcanvas-btn-2");
+
+	if (lt_header2_btn) {
+		lt_header2_btn.addEventListener("mouseenter", function () {
+			lt_header2_right.classList.add("menu-open");
+		});
+
+		lt_header2_right.addEventListener("mouseleave", function () {
+			lt_header2_right.classList.remove("menu-open");
+		});
+	}
+}
+
 
 // parallax-images
 if ($(".wa_magnetic_1_trigger").length) {

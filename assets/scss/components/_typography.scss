@@ -87,6 +87,10 @@
     @media #{$sm} {
         font-size: 34px;
     }
+
+    &:is(.has-v2) {
+        line-height: 1;
+    }
 }
 
 

@@ -319,6 +319,7 @@
         color: #fff;
         margin-bottom: 15px;
         letter-spacing: -3%;
+        line-height: 1;
 
         @media #{$xl} {
             font-size: 70px;
@@ -359,13 +360,14 @@
         top: 0;
         height: 100%;
         z-index: -2;
+        mix-blend-mode: luminosity;
     }
 
     &-shape {
         position: absolute;
-        top: 0px;
+        top: -21px;
         z-index: -1;
-        right: 32%;
+        right: 31.9%;
 
         @media #{$xxxl} {
             right: 27%;
@@ -411,11 +413,29 @@
         &-main {
             position: absolute;
             bottom: 0;
-            right: -8%;
+            right: -10%;
             width: 78%;
+            text-align: right;
 
             @media #{$xs} {
                 width: 90%;
+            }
+
+            img {
+                max-width: 100%;
+
+                /* the visuals take turns in the same spot */
+                & + img {
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                }
+
+                &:nth-child(2) {
+                    @media #{$over} {
+                        left: 50px;
+                    }
+                }
             }
         }
 
